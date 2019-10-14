@@ -1,4 +1,4 @@
-﻿using System;
+﻿using FichadaBinser.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +11,8 @@ namespace FichadaBinser
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new FichadaPage());
+
         }
 
         protected override void OnStart()

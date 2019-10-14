@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FichadaBinser.Views.FichadaPage"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    NavigationPage.HasNavigationBar="false"
+    Title="Fichadas">
+    <ContentPage.Content>
+        <ScrollView
+            BindingContext="{Binding Fichada}">
+            <StackLayout
+                Padding="10">
+                <Label
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="0,20,0,0"
+                    Text="{Binding CurrentDate, Mode=TwoWay}">
+                </Label>
+                <Label
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="0,0,0,20"
+                    Text="{Binding CurrentTime, Mode=TwoWay}">
+                </Label>
+                <Button
+                    BackgroundColor="Navy"
+                    BorderRadius="23"
+                    Command="{Binding RegisterEntryCommand}"
+                    HeightRequest="43"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsEnabledRegisterEntry}"
+                    Style=""
+                    Text="Registrar Ingreso"
+                    TextColor="White">
+                </Button>
+                <Button
+                    BackgroundColor="Navy"
+                    BorderRadius="23"
+                    Command="{Binding RegisterStartLunchCommand}"
+                    HeightRequest="43"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsEnabledRegisterStartLunch}"
+                    Text="Registrar Inicio Almuerzo"
+                    TextColor="White">
+                </Button>
+                <Button
+                    BackgroundColor="Navy"
+                    BorderRadius="23"
+                    Command="{Binding RegisterEndLunchCommand}"
+                    HeightRequest="43"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsEnabledRegisterEndLunch}"
+                    Text="Registrar Fin Almuerzo"
+                    TextColor="White">
+                </Button>
+                <Button
+                    BackgroundColor="Navy"
+                    BorderRadius="23"
+                    Command="{Binding RegisterExitCommand}"
+                    HeightRequest="43"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsEnabledRegisterExit}"
+                    Text="Registrar Egreso"
+                    TextColor="White">
+                </Button>
+                <Label
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="0,0,0,20"
+                    Text="{Binding EntryTime, Mode=TwoWay}">
+                </Label>
+                <Label
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="0,0,0,20"
+                    Text="{Binding LunchStartTime, Mode=TwoWay}">
+                </Label>
+                <Label
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="0,0,0,20"
+                    Text="{Binding LunchEndTime, Mode=TwoWay}">
+                </Label>
+                <Label
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="0,0,0,20"
+                    Text="{Binding ExitTime, Mode=TwoWay}">
+                </Label>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
