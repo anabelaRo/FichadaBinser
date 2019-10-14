@@ -331,36 +331,76 @@ namespace FichadaBinser.ViewModels
             this.SetButtonsEnabled();
         }
 
-        private void CancelEntry()
+        private async void CancelEntry()
         {
-            this.internalEntryTime = null;
-            this.EntryTime = string.Empty;
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                Languages.ConfirmCancelEntry,
+                Languages.Cancel,
+                null,
+                Languages.Yes,
+                Languages.No);
 
-            this.SetButtonsEnabled();
+            if (response == Languages.Yes)
+            {
+                this.internalEntryTime = null;
+                this.EntryTime = string.Empty;
+
+                this.SetButtonsEnabled();
+            }
         }
 
-        private void CancelStartLunch()
+        private async void CancelStartLunch()
         {
-            this.internalStartLunchTime = null;
-            this.StartLunchTime = string.Empty;
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                Languages.ConfirmCancelStartLunch,
+                Languages.Cancel,
+                null,
+                Languages.Yes,
+                Languages.No);
 
-            this.SetButtonsEnabled();
+            if (response == Languages.Yes)
+            {
+                this.internalStartLunchTime = null;
+                this.StartLunchTime = string.Empty;
+
+                this.SetButtonsEnabled();
+            }
         }
 
-        private void CancelEndLunch()
+        private async void CancelEndLunch()
         {
-            this.internalEndLunchTime = null;
-            this.EndLunchTime = string.Empty;
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                Languages.ConfirmCancelEndLunch,
+                Languages.Cancel,
+                null,
+                Languages.Yes,
+                Languages.No);
 
-            this.SetButtonsEnabled();
+            if (response == Languages.Yes)
+            {
+                this.internalEndLunchTime = null;
+                this.EndLunchTime = string.Empty;
+
+                this.SetButtonsEnabled();
+            }
         }
 
-        private void CancelExit()
+        private async void CancelExit()
         {
-            this.internalExitTime = null;
-            this.ExitTime = string.Empty;
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                Languages.ConfirmCancelExit,
+                Languages.Cancel,
+                null,
+                Languages.Yes,
+                Languages.No);
 
-            this.SetButtonsEnabled();
+            if (response == Languages.Yes)
+            {
+                this.internalExitTime = null;
+                this.ExitTime = string.Empty;
+
+                this.SetButtonsEnabled();
+            }
         }
 
         #endregion
