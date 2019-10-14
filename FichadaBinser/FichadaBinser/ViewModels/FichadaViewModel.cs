@@ -82,7 +82,6 @@ namespace FichadaBinser.ViewModels
             set { SetValue(ref totalTime, value); }
         }
 
-
         public bool IsEnabledRegisterEntry
         {
             get { return isEnabledRegisterEntry; }
