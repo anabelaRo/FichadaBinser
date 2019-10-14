@@ -184,6 +184,27 @@
                         WidthRequest="20">
                     </Button>
                 </Grid>
+                <Grid
+                    Margin="0,30,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        FontSize="Large"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        HorizontalTextAlignment="End"
+                        Text="Tiempo Total">
+                    </Label>
+                    <Label
+                        FontSize="Large"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding TotalTime, Mode=OneWay}">
+                    </Label>
+                </Grid>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

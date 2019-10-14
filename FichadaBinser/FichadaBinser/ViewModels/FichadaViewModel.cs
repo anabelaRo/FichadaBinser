@@ -19,6 +19,7 @@ namespace FichadaBinser.ViewModels
         private string startLunchTime;
         private string endLunchTime;
         private string exitTime;
+        private string totalTime;
 
         private bool isEnabledRegisterEntry;
         private bool isEnabledRegisterStartLunch;
@@ -74,6 +75,13 @@ namespace FichadaBinser.ViewModels
             get { return exitTime; }
             set { SetValue(ref exitTime, value); }
         }
+
+        public string TotalTime
+        {
+            get { return totalTime; }
+            set { SetValue(ref totalTime, value); }
+        }
+
 
         public bool IsEnabledRegisterEntry
         {
@@ -154,6 +162,52 @@ namespace FichadaBinser.ViewModels
             this.CurrentDate = strFecha;
         }
 
+        private void DoTimerAction()
+        {
+            LoadCurrentTime();
+            LoadTotalTime();
+        }
+
+        private void LoadTotalTime()
+        {
+            int totalSeconds = 0;
+
+            if (internalEntryTime != null)
+            {
+                if (internalStartLunchTime != null)
+                {
+                    totalSeconds += Convert.ToInt32(internalStartLunchTime.Value.Subtract(internalEntryTime.Value).TotalSeconds);
+
+                    if (internalEndLunchTime != null)
+                    {
+                        if (internalExitTime != null)
+                        {
+                            totalSeconds += Convert.ToInt32(internalExitTime.Value.Subtract(internalEndLunchTime.Value).TotalSeconds);
+                        }
+                        else
+                        {
+                            totalSeconds += Convert.ToInt32(DateTime.Now.Subtract(internalEndLunchTime.Value).TotalSeconds);
+                        }
+                    }
+                }
+                else
+                {
+                    if (internalExitTime != null)
+                    {
+                        totalSeconds += Convert.ToInt32(internalExitTime.Value.Subtract(internalEntryTime.Value).TotalSeconds);
+                    }
+                    else
+                    {
+                        totalSeconds += Convert.ToInt32(DateTime.Now.Subtract(internalEntryTime.Value).TotalSeconds);
+                    }
+                }
+            }
+
+            TimeSpan time = TimeSpan.FromSeconds(totalSeconds);
+
+            this.TotalTime = time.ToString(@"hh\:mm\:ss");
+        }
+
         private void LoadCurrentTime()
         {
             this.CurrentTime = DateTime.Now.ToString("HH:mm:ss");
@@ -163,7 +217,7 @@ namespace FichadaBinser.ViewModels
         {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                Device.BeginInvokeOnMainThread(() => this.LoadCurrentTime());
+                Device.BeginInvokeOnMainThread(() => this.DoTimerAction());
                 return true;
             });
         }
