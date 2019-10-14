@@ -16,8 +16,8 @@ namespace FichadaBinser.ViewModels
         private string currentDate;
         private string currentTime;
         private string entryTime;
-        private string lunchStartTime;
-        private string lunchEndTime;
+        private string startLunchTime;
+        private string endLunchTime;
         private string exitTime;
 
         private bool isEnabledRegisterEntry;
@@ -25,9 +25,14 @@ namespace FichadaBinser.ViewModels
         private bool isEnabledRegisterEndLunch;
         private bool isEnabledRegisterExit;
 
+        private bool isVisibleCancelEntry;
+        private bool isVisibleCancelStartLunch;
+        private bool isVisibleCancelEndLunch;
+        private bool isVisibleCancelExit;
+
         private DateTime? internalEntryTime;
-        private DateTime? internalLunchStartTime;
-        private DateTime? internalLunchEndTime;
+        private DateTime? internalStartLunchTime;
+        private DateTime? internalEndLunchTime;
         private DateTime? internalExitTime;
 
         #endregion
@@ -52,16 +57,16 @@ namespace FichadaBinser.ViewModels
             set { SetValue(ref entryTime, value); }
         }
 
-        public string LunchStartTime
+        public string StartLunchTime
         {
-            get { return lunchStartTime; }
-            set { SetValue(ref lunchStartTime, value); }
+            get { return startLunchTime; }
+            set { SetValue(ref startLunchTime, value); }
         }
 
-        public string LunchEndTime
+        public string EndLunchTime
         {
-            get { return lunchEndTime; }
-            set { SetValue(ref lunchEndTime, value); }
+            get { return endLunchTime; }
+            set { SetValue(ref endLunchTime, value); }
         }
 
         public string ExitTime
@@ -92,6 +97,30 @@ namespace FichadaBinser.ViewModels
         {
             get { return isEnabledRegisterExit; }
             set { SetValue(ref isEnabledRegisterExit, value); }
+        }
+
+        public bool IsVisibleCancelEntry
+        {
+            get { return isVisibleCancelEntry; }
+            set { SetValue(ref isVisibleCancelEntry, value); }
+        }
+
+        public bool IsVisibleCancelStartLunch
+        {
+            get { return isVisibleCancelStartLunch; }
+            set { SetValue(ref isVisibleCancelStartLunch, value); }
+        }
+
+        public bool IsVisibleCancelEndLunch
+        {
+            get { return isVisibleCancelEndLunch; }
+            set { SetValue(ref isVisibleCancelEndLunch, value); }
+        }
+
+        public bool IsVisibleCancelExit
+        {
+            get { return isVisibleCancelExit; }
+            set { SetValue(ref isVisibleCancelExit, value); }
         }
 
         #endregion
@@ -132,7 +161,8 @@ namespace FichadaBinser.ViewModels
 
         private void InitializeTimer()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () => {
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
                 Device.BeginInvokeOnMainThread(() => this.LoadCurrentTime());
                 return true;
             });
@@ -141,9 +171,64 @@ namespace FichadaBinser.ViewModels
         private void SetButtonsEnabled()
         {
             this.IsEnabledRegisterEntry = this.internalEntryTime == null;
-            this.IsEnabledRegisterStartLunch = this.internalLunchStartTime == null;
-            this.IsEnabledRegisterEndLunch = this.internalLunchEndTime == null;
-            this.IsEnabledRegisterExit = this.internalExitTime == null;
+            this.IsEnabledRegisterStartLunch = this.internalStartLunchTime == null && this.internalEntryTime != null && this.internalExitTime == null;
+            this.IsEnabledRegisterEndLunch = this.internalEndLunchTime == null && this.internalStartLunchTime != null && this.internalExitTime == null;
+            this.IsEnabledRegisterExit = this.internalExitTime == null && this.internalEntryTime != null && ((this.internalStartLunchTime == null && this.internalEndLunchTime == null) || (this.internalStartLunchTime != null && this.internalEndLunchTime != null));
+
+            this.IsVisibleCancelEntry = this.CanCancelEntry();
+            this.IsVisibleCancelStartLunch = this.CanCancelStartLunch();
+            this.IsVisibleCancelEndLunch = this.CanCancelEndLunch();
+            this.IsVisibleCancelExit = this.CanCancelExit();
+        }
+
+        private bool CanCancelEntry()
+        {
+            if (this.internalEntryTime != null
+                && this.internalStartLunchTime == null
+                && this.internalEndLunchTime == null
+                && this.internalExitTime == null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool CanCancelStartLunch()
+        {
+            if (this.internalEntryTime != null
+                && this.internalStartLunchTime != null
+                && this.internalEndLunchTime == null
+                && this.internalExitTime == null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool CanCancelEndLunch()
+        {
+            if (this.internalEntryTime != null
+                && this.internalStartLunchTime != null
+                && this.internalEndLunchTime != null
+                && this.internalExitTime == null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool CanCancelExit()
+        {
+            if (this.internalEntryTime != null
+                && this.internalExitTime != null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         #endregion
@@ -182,23 +267,58 @@ namespace FichadaBinser.ViewModels
             }
         }
 
+        public ICommand CancelEntryCommand
+        {
+            get
+            {
+                return new RelayCommand(CancelEntry);
+            }
+        }
+
+        public ICommand CancelStartLunchCommand
+        {
+            get
+            {
+                return new RelayCommand(CancelStartLunch);
+            }
+        }
+
+        public ICommand CancelEndLunchCommand
+        {
+            get
+            {
+                return new RelayCommand(CancelEndLunch);
+            }
+        }
+
+        public ICommand CancelExitCommand
+        {
+            get
+            {
+                return new RelayCommand(CancelExit);
+            }
+        }
+
         public async void RegisterEntry()
         {
             this.internalEntryTime = DateTime.Now;
+            this.EntryTime = this.internalEntryTime.Value.ToString("HH:mm:ss");
 
             this.SetButtonsEnabled();
         }
 
         public async void RegisterStartLunch()
         {
-            this.internalLunchStartTime = DateTime.Now;
+            this.internalStartLunchTime = DateTime.Now;
+            this.StartLunchTime = this.internalStartLunchTime.Value.ToString("HH:mm:ss");
 
             this.SetButtonsEnabled();
         }
 
         public async void RegisterEndLunch()
         {
-            this.internalLunchEndTime = DateTime.Now;
+            this.internalEndLunchTime = DateTime.Now;
+            this.EndLunchTime = this.internalEndLunchTime.Value.ToString("HH:mm:ss");
 
             this.SetButtonsEnabled();
         }
@@ -206,6 +326,39 @@ namespace FichadaBinser.ViewModels
         public async void RegisterExit()
         {
             this.internalExitTime = DateTime.Now;
+            this.ExitTime = this.internalExitTime.Value.ToString("HH:mm:ss");
+
+            this.SetButtonsEnabled();
+        }
+
+        private void CancelEntry()
+        {
+            this.internalEntryTime = null;
+            this.EntryTime = string.Empty;
+
+            this.SetButtonsEnabled();
+        }
+
+        private void CancelStartLunch()
+        {
+            this.internalStartLunchTime = null;
+            this.StartLunchTime = string.Empty;
+
+            this.SetButtonsEnabled();
+        }
+
+        private void CancelEndLunch()
+        {
+            this.internalEndLunchTime = null;
+            this.EndLunchTime = string.Empty;
+
+            this.SetButtonsEnabled();
+        }
+
+        private void CancelExit()
+        {
+            this.internalExitTime = null;
+            this.ExitTime = string.Empty;
 
             this.SetButtonsEnabled();
         }

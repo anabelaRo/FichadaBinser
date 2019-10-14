@@ -30,7 +30,6 @@
                     HeightRequest="43"
                     HorizontalOptions="FillAndExpand"
                     IsEnabled="{Binding IsEnabledRegisterEntry}"
-                    Style=""
                     Text="Registrar Ingreso"
                     TextColor="White">
                 </Button>
@@ -64,30 +63,127 @@
                     Text="Registrar Egreso"
                     TextColor="White">
                 </Button>
-                <Label
-                    FontSize="Large"
-                    HorizontalOptions="CenterAndExpand"
-                    Margin="0,0,0,20"
-                    Text="{Binding EntryTime, Mode=TwoWay}">
-                </Label>
-                <Label
-                    FontSize="Large"
-                    HorizontalOptions="CenterAndExpand"
-                    Margin="0,0,0,20"
-                    Text="{Binding LunchStartTime, Mode=TwoWay}">
-                </Label>
-                <Label
-                    FontSize="Large"
-                    HorizontalOptions="CenterAndExpand"
-                    Margin="0,0,0,20"
-                    Text="{Binding LunchEndTime, Mode=TwoWay}">
-                </Label>
-                <Label
-                    FontSize="Large"
-                    HorizontalOptions="CenterAndExpand"
-                    Margin="0,0,0,20"
-                    Text="{Binding ExitTime, Mode=TwoWay}">
-                </Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        HorizontalTextAlignment="End"
+                        Text="Hora Ingreso"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding EntryTime, Mode=TwoWay}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Button
+                        BackgroundColor="IndianRed"
+                        BorderRadius="10"
+                        Command="{Binding CancelEntryCommand}"
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        HeightRequest="20"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding IsVisibleCancelEntry, Mode=TwoWay}"
+                        Text="x"
+                        VerticalOptions="Center"
+                        WidthRequest="20">
+                    </Button>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        HorizontalTextAlignment="End"
+                        Text="Hora Inicio Almuerzo"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding StartLunchTime, Mode=TwoWay}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Button
+                        BackgroundColor="IndianRed"
+                        BorderRadius="10"
+                        Command="{Binding CancelStartLunchCommand}"
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        HeightRequest="20"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding IsVisibleCancelStartLunch, Mode=TwoWay}"
+                        Text="x"
+                        VerticalOptions="Center"
+                        WidthRequest="20">
+                    </Button>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        HorizontalTextAlignment="End"
+                        Text="Hora Fin Almuerzo"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding EndLunchTime, Mode=TwoWay}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Button
+                        BackgroundColor="IndianRed"
+                        BorderRadius="10"
+                        Command="{Binding CancelEndLunchCommand}"
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        HeightRequest="20"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding IsVisibleCancelEndLunch, Mode=TwoWay}"
+                        Text="x"
+                        VerticalOptions="Center"
+                        WidthRequest="20">
+                    </Button>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        HorizontalTextAlignment="End"
+                        Text="Hora Egreso"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding ExitTime, Mode=TwoWay}"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Button
+                        BackgroundColor="IndianRed"
+                        BorderRadius="10"
+                        Command="{Binding CancelExitCommand}"
+                        Grid.Column="2"
+                        Grid.Row="3"
+                        HeightRequest="20"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding IsVisibleCancelExit, Mode=TwoWay}"
+                        Text="x"
+                        VerticalOptions="Center"
+                        WidthRequest="20">
+                    </Button>
+                </Grid>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
