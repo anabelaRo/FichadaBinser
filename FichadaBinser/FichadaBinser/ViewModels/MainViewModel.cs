@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FichadaBinser.ViewModels
+﻿namespace FichadaBinser.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
@@ -23,6 +19,7 @@ namespace FichadaBinser.ViewModels
         #region ViewModels
 
         public FichadaViewModel Fichada { get; set; }
+        public SemanaViewModel Semana { get; set; }
 
         #endregion
 
@@ -33,6 +30,7 @@ namespace FichadaBinser.ViewModels
             instance = this;
 
             this.Fichada = new FichadaViewModel();
+            this.Semana = new SemanaViewModel();
         }
 
         #endregion

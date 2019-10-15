@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FichadaBinser.Views.SemanaPage"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}"
+    NavigationPage.HasNavigationBar="false"
+    Title="Fichadas">
+    <ContentPage.Content>
+        <ScrollView
+            BindingContext="{Binding Semana}">
+            <StackLayout
+                Padding="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        HorizontalTextAlignment="End"
+                        Text="Lunes"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding TotalTimeMondayString, Mode=TwoWay}"
+                        VerticalOptions="Center">
+                    </Label>
+
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        HorizontalTextAlignment="End"
+                        Text="Martes"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding TotalTimeTuesdayString, Mode=TwoWay}"
+                        VerticalOptions="Center">
+                    </Label>
+
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        HorizontalTextAlignment="End"
+                        Text="Miércoles"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding TotalTimeWednesdayString, Mode=TwoWay}"
+                        VerticalOptions="Center">
+                    </Label>
+
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        HorizontalTextAlignment="End"
+                        Text="Jueves"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding TotalTimeThursdayString, Mode=TwoWay}"
+                        VerticalOptions="Center">
+                    </Label>
+
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="4"
+                        HorizontalTextAlignment="End"
+                        Text="Viernes"
+                        VerticalOptions="Center">
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="4"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding TotalTimeFridayString, Mode=TwoWay}"
+                        VerticalOptions="Center">
+                    </Label>
+                </Grid>
+                <Grid
+                    Margin="0,30,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        FontSize="Large"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        HorizontalTextAlignment="End"
+                        Text="Tiempo Total">
+                    </Label>
+                    <Label
+                        FontSize="Large"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding TotalTime, Mode=OneWay}">
+                    </Label>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

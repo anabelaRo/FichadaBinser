@@ -27,8 +27,7 @@ namespace FichadaBinser.Models
         public DateTime? EndLunchTime { get; set; }
         public DateTime? ExitTime { get; set; }
 
-        [Ignore]
-        public string TotalTimeString
+        public int TotalTime
         {
             get
             {
@@ -65,7 +64,16 @@ namespace FichadaBinser.Models
                     }
                 }
 
-                TimeSpan time = TimeSpan.FromSeconds(totalSeconds);
+                return totalSeconds;
+            }
+        }
+
+        [Ignore]
+        public string TotalTimeString
+        {
+            get
+            {
+                TimeSpan time = TimeSpan.FromSeconds(this.TotalTime);
 
                 return time.ToString(@"hh\:mm\:ss");
             }

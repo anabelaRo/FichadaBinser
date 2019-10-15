@@ -158,15 +158,13 @@ namespace FichadaBinser.ViewModels
 
         private void LoadCurrentDate()
         {
-            DateTime fecha = this.currentDay.Date;
-
             CultureInfo myCulture = new CultureInfo("es-ES");
 
             string strFecha = string.Format(
                     "{0} {1} de {2}",
-                    StringHelper.FirstUpper(myCulture.DateTimeFormat.GetDayName(fecha.DayOfWeek)),
-                    fecha.Day.ToString(),
-                    StringHelper.FirstUpper(myCulture.DateTimeFormat.GetMonthName(fecha.Month)));
+                    StringHelper.FirstUpper(myCulture.DateTimeFormat.GetDayName(this.currentDay.Date.DayOfWeek)),
+                    this.currentDay.Date.Day.ToString(),
+                    StringHelper.FirstUpper(myCulture.DateTimeFormat.GetMonthName(this.currentDay.Date.Month)));
 
             this.CurrentDate = strFecha;
         }
