@@ -45,12 +45,6 @@ namespace FichadaBinser.ViewModels
 
         #region Properties
 
-        public Day CurrentDay
-        {
-            get { return currentDay; }
-            set { SetValue(ref currentDay, value); }
-        }
-
         public string CurrentDate
         {
             get { return currentDate; }
@@ -204,10 +198,10 @@ namespace FichadaBinser.ViewModels
 
         private void SetButtonsEnabled()
         {
-            this.IsEnabledRegisterEntry = this.CurrentDay.EntryTime == null;
-            this.IsEnabledRegisterStartLunch = this.CurrentDay.StartLunchTime == null && this.CurrentDay.EntryTime != null && this.CurrentDay.ExitTime == null;
-            this.IsEnabledRegisterEndLunch = this.CurrentDay.EndLunchTime == null && this.CurrentDay.StartLunchTime != null && this.CurrentDay.ExitTime == null;
-            this.IsEnabledRegisterExit = this.CurrentDay.ExitTime == null && this.CurrentDay.EntryTime != null && ((this.CurrentDay.StartLunchTime == null && this.CurrentDay.EndLunchTime == null) || (this.CurrentDay.StartLunchTime != null && this.CurrentDay.EndLunchTime != null));
+            this.IsEnabledRegisterEntry = this.currentDay.EntryTime == null;
+            this.IsEnabledRegisterStartLunch = this.currentDay.StartLunchTime == null && this.currentDay.EntryTime != null && this.currentDay.ExitTime == null;
+            this.IsEnabledRegisterEndLunch = this.currentDay.EndLunchTime == null && this.currentDay.StartLunchTime != null && this.currentDay.ExitTime == null;
+            this.IsEnabledRegisterExit = this.currentDay.ExitTime == null && this.currentDay.EntryTime != null && ((this.currentDay.StartLunchTime == null && this.currentDay.EndLunchTime == null) || (this.currentDay.StartLunchTime != null && this.currentDay.EndLunchTime != null));
 
             this.IsVisibleCancelEntry = this.CanCancelEntry();
             this.IsVisibleCancelStartLunch = this.CanCancelStartLunch();
@@ -217,12 +211,13 @@ namespace FichadaBinser.ViewModels
 
         private bool CanCancelEntry()
         {
-            if (this.CurrentDay.EntryTime != null
-                && this.CurrentDay.StartLunchTime == null
-                && this.CurrentDay.EndLunchTime == null
-                && this.CurrentDay.ExitTime == null)
+            if (this.currentDay.EntryTime != null
+                && this.currentDay.StartLunchTime == null
+                && this.currentDay.EndLunchTime == null
+                && this.currentDay.ExitTime == null)
             {
-                return true;
+                if (this.currentDay.Date.ToUniversalTime() == DateTime.Today.ToUniversalTime())
+                    return true;
             }
 
             return false;
@@ -230,12 +225,13 @@ namespace FichadaBinser.ViewModels
 
         private bool CanCancelStartLunch()
         {
-            if (this.CurrentDay.EntryTime != null
-                && this.CurrentDay.StartLunchTime != null
-                && this.CurrentDay.EndLunchTime == null
-                && this.CurrentDay.ExitTime == null)
+            if (this.currentDay.EntryTime != null
+                && this.currentDay.StartLunchTime != null
+                && this.currentDay.EndLunchTime == null
+                && this.currentDay.ExitTime == null)
             {
-                return true;
+                if (this.currentDay.Date.ToUniversalTime() == DateTime.Today.ToUniversalTime())
+                    return true;
             }
 
             return false;
@@ -243,12 +239,13 @@ namespace FichadaBinser.ViewModels
 
         private bool CanCancelEndLunch()
         {
-            if (this.CurrentDay.EntryTime != null
-                && this.CurrentDay.StartLunchTime != null
-                && this.CurrentDay.EndLunchTime != null
-                && this.CurrentDay.ExitTime == null)
+            if (this.currentDay.EntryTime != null
+                && this.currentDay.StartLunchTime != null
+                && this.currentDay.EndLunchTime != null
+                && this.currentDay.ExitTime == null)
             {
-                return true;
+                if (this.currentDay.Date.ToUniversalTime() == DateTime.Today.ToUniversalTime())
+                    return true;
             }
 
             return false;
@@ -256,10 +253,11 @@ namespace FichadaBinser.ViewModels
 
         private bool CanCancelExit()
         {
-            if (this.CurrentDay.EntryTime != null
-                && this.CurrentDay.ExitTime != null)
+            if (this.currentDay.EntryTime != null
+                && this.currentDay.ExitTime != null)
             {
-                return true;
+                if (this.currentDay.Date.ToUniversalTime() == DateTime.Today.ToUniversalTime())
+                    return true;
             }
 
             return false;
