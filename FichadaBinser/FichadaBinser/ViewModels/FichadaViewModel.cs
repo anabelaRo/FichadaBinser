@@ -39,11 +39,6 @@ namespace FichadaBinser.ViewModels
         private bool isVisibleCancelEndLunch;
         private bool isVisibleCancelExit;
 
-        private DateTime? internalEntryTime;
-        private DateTime? internalStartLunchTime;
-        private DateTime? internalEndLunchTime;
-        private DateTime? internalExitTime;
-
         private Day currentDay;
 
         #endregion
@@ -156,19 +151,20 @@ namespace FichadaBinser.ViewModels
 
             this.currentDay = dayDataService.GetCurrentDay();
 
-            this.LoadCurrentDate(currentDay);
+            this.LoadCurrentDate();
             this.LoadCurrentTime();
             this.InitializeTimer();
             this.SetButtonsEnabled();
+            this.RefreshView();
         }
 
         #endregion
 
         #region Methods
 
-        private void LoadCurrentDate(Day day)
+        private void LoadCurrentDate()
         {
-            DateTime fecha = day.Date;
+            DateTime fecha = this.currentDay.Date;
 
             CultureInfo myCulture = new CultureInfo("es-ES");
 
@@ -189,42 +185,7 @@ namespace FichadaBinser.ViewModels
 
         private void LoadTotalTime()
         {
-            int totalSeconds = 0;
-
-            if (internalEntryTime != null)
-            {
-                if (internalStartLunchTime != null)
-                {
-                    totalSeconds += Convert.ToInt32(internalStartLunchTime.Value.Subtract(internalEntryTime.Value).TotalSeconds);
-
-                    if (internalEndLunchTime != null)
-                    {
-                        if (internalExitTime != null)
-                        {
-                            totalSeconds += Convert.ToInt32(internalExitTime.Value.Subtract(internalEndLunchTime.Value).TotalSeconds);
-                        }
-                        else
-                        {
-                            totalSeconds += Convert.ToInt32(DateTime.Now.Subtract(internalEndLunchTime.Value).TotalSeconds);
-                        }
-                    }
-                }
-                else
-                {
-                    if (internalExitTime != null)
-                    {
-                        totalSeconds += Convert.ToInt32(internalExitTime.Value.Subtract(internalEntryTime.Value).TotalSeconds);
-                    }
-                    else
-                    {
-                        totalSeconds += Convert.ToInt32(DateTime.Now.Subtract(internalEntryTime.Value).TotalSeconds);
-                    }
-                }
-            }
-
-            TimeSpan time = TimeSpan.FromSeconds(totalSeconds);
-
-            this.TotalTime = time.ToString(@"hh\:mm\:ss");
+            this.TotalTime = this.currentDay.TotalTimeString;
         }
 
         private void LoadCurrentTime()
@@ -243,10 +204,10 @@ namespace FichadaBinser.ViewModels
 
         private void SetButtonsEnabled()
         {
-            this.IsEnabledRegisterEntry = this.internalEntryTime == null;
-            this.IsEnabledRegisterStartLunch = this.internalStartLunchTime == null && this.internalEntryTime != null && this.internalExitTime == null;
-            this.IsEnabledRegisterEndLunch = this.internalEndLunchTime == null && this.internalStartLunchTime != null && this.internalExitTime == null;
-            this.IsEnabledRegisterExit = this.internalExitTime == null && this.internalEntryTime != null && ((this.internalStartLunchTime == null && this.internalEndLunchTime == null) || (this.internalStartLunchTime != null && this.internalEndLunchTime != null));
+            this.IsEnabledRegisterEntry = this.CurrentDay.EntryTime == null;
+            this.IsEnabledRegisterStartLunch = this.CurrentDay.StartLunchTime == null && this.CurrentDay.EntryTime != null && this.CurrentDay.ExitTime == null;
+            this.IsEnabledRegisterEndLunch = this.CurrentDay.EndLunchTime == null && this.CurrentDay.StartLunchTime != null && this.CurrentDay.ExitTime == null;
+            this.IsEnabledRegisterExit = this.CurrentDay.ExitTime == null && this.CurrentDay.EntryTime != null && ((this.CurrentDay.StartLunchTime == null && this.CurrentDay.EndLunchTime == null) || (this.CurrentDay.StartLunchTime != null && this.CurrentDay.EndLunchTime != null));
 
             this.IsVisibleCancelEntry = this.CanCancelEntry();
             this.IsVisibleCancelStartLunch = this.CanCancelStartLunch();
@@ -256,10 +217,10 @@ namespace FichadaBinser.ViewModels
 
         private bool CanCancelEntry()
         {
-            if (this.internalEntryTime != null
-                && this.internalStartLunchTime == null
-                && this.internalEndLunchTime == null
-                && this.internalExitTime == null)
+            if (this.CurrentDay.EntryTime != null
+                && this.CurrentDay.StartLunchTime == null
+                && this.CurrentDay.EndLunchTime == null
+                && this.CurrentDay.ExitTime == null)
             {
                 return true;
             }
@@ -269,10 +230,10 @@ namespace FichadaBinser.ViewModels
 
         private bool CanCancelStartLunch()
         {
-            if (this.internalEntryTime != null
-                && this.internalStartLunchTime != null
-                && this.internalEndLunchTime == null
-                && this.internalExitTime == null)
+            if (this.CurrentDay.EntryTime != null
+                && this.CurrentDay.StartLunchTime != null
+                && this.CurrentDay.EndLunchTime == null
+                && this.CurrentDay.ExitTime == null)
             {
                 return true;
             }
@@ -282,10 +243,10 @@ namespace FichadaBinser.ViewModels
 
         private bool CanCancelEndLunch()
         {
-            if (this.internalEntryTime != null
-                && this.internalStartLunchTime != null
-                && this.internalEndLunchTime != null
-                && this.internalExitTime == null)
+            if (this.CurrentDay.EntryTime != null
+                && this.CurrentDay.StartLunchTime != null
+                && this.CurrentDay.EndLunchTime != null
+                && this.CurrentDay.ExitTime == null)
             {
                 return true;
             }
@@ -295,8 +256,8 @@ namespace FichadaBinser.ViewModels
 
         private bool CanCancelExit()
         {
-            if (this.internalEntryTime != null
-                && this.internalExitTime != null)
+            if (this.CurrentDay.EntryTime != null
+                && this.CurrentDay.ExitTime != null)
             {
                 return true;
             }
@@ -374,50 +335,42 @@ namespace FichadaBinser.ViewModels
 
         public async void RegisterEntry()
         {
-            this.internalEntryTime = DateTime.Now;
-            this.EntryTime = this.internalEntryTime.Value.ToString("HH:mm:ss");
-
-            this.currentDay.EntryTime = this.internalEntryTime;
+            this.currentDay.EntryTime = DateTime.Now.ToUniversalTime();
 
             this.dayDataService.Update(this.currentDay);
 
             this.SetButtonsEnabled();
+            this.RefreshView();
         }
 
         public async void RegisterStartLunch()
         {
-            this.internalStartLunchTime = DateTime.Now;
-            this.StartLunchTime = this.internalStartLunchTime.Value.ToString("HH:mm:ss");
-
-            this.currentDay.StartLunchTime = this.internalStartLunchTime;
+            this.currentDay.StartLunchTime = DateTime.Now.ToUniversalTime();
 
             this.dayDataService.Update(this.currentDay);
 
             this.SetButtonsEnabled();
+            this.RefreshView();
         }
 
         public async void RegisterEndLunch()
         {
-            this.internalEndLunchTime = DateTime.Now;
-            this.EndLunchTime = this.internalEndLunchTime.Value.ToString("HH:mm:ss");
-
-            this.currentDay.EndLunchTime = this.internalEndLunchTime;
+            this.currentDay.EndLunchTime = DateTime.Now.ToUniversalTime();
 
             this.dayDataService.Update(this.currentDay);
 
             this.SetButtonsEnabled();
+            this.RefreshView();
         }
 
         public async void RegisterExit()
         {
-            this.internalExitTime = DateTime.Now;
-            this.ExitTime = this.internalExitTime.Value.ToString("HH:mm:ss");
-
-            this.currentDay.ExitTime = this.internalExitTime;
+            this.currentDay.ExitTime = DateTime.Now.ToUniversalTime();
 
             this.dayDataService.Update(this.currentDay);
 
             this.SetButtonsEnabled();
+            this.RefreshView();
         }
 
         private async void CancelEntry()
@@ -431,14 +384,12 @@ namespace FichadaBinser.ViewModels
 
             if (response == Languages.Yes)
             {
-                this.internalEntryTime = null;
-                this.EntryTime = string.Empty;
-
-                this.currentDay.EntryTime = this.internalEntryTime;
+                this.currentDay.EntryTime = null;
 
                 this.dayDataService.Update(this.currentDay);
 
                 this.SetButtonsEnabled();
+                this.RefreshView();
             }
         }
 
@@ -453,14 +404,12 @@ namespace FichadaBinser.ViewModels
 
             if (response == Languages.Yes)
             {
-                this.internalStartLunchTime = null;
-                this.StartLunchTime = string.Empty;
-
-                this.currentDay.StartLunchTime = this.internalStartLunchTime;
+                this.currentDay.StartLunchTime = null;
 
                 this.dayDataService.Update(this.currentDay);
 
                 this.SetButtonsEnabled();
+                this.RefreshView();
             }
         }
 
@@ -475,14 +424,12 @@ namespace FichadaBinser.ViewModels
 
             if (response == Languages.Yes)
             {
-                this.internalEndLunchTime = null;
-                this.EndLunchTime = string.Empty;
-
-                this.currentDay.EndLunchTime = this.internalEndLunchTime;
+                this.currentDay.EndLunchTime = null;
 
                 this.dayDataService.Update(this.currentDay);
 
                 this.SetButtonsEnabled();
+                this.RefreshView();
             }
         }
 
@@ -497,15 +444,22 @@ namespace FichadaBinser.ViewModels
 
             if (response == Languages.Yes)
             {
-                this.internalExitTime = null;
-                this.ExitTime = string.Empty;
-
-                this.currentDay.ExitTime = this.internalExitTime;
+                this.currentDay.ExitTime = null;
 
                 this.dayDataService.Update(this.currentDay);
 
                 this.SetButtonsEnabled();
+                this.RefreshView();
             }
+        }
+
+        private void RefreshView()
+        {
+            this.EntryTime = this.currentDay.EntryTimeString;
+            this.StartLunchTime = this.currentDay.StartLunchTimeString;
+            this.EndLunchTime = this.currentDay.EndLunchTimeString;
+            this.ExitTime = this.currentDay.ExitTimeString;
+            this.TotalTime = this.currentDay.TotalTimeString;
         }
 
         #endregion

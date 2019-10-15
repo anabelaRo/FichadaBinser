@@ -10,13 +10,15 @@
         {
             using (var da = new DataAccess())
             {
-                int dayId = DayHelper.GetDayIdByDate(DateTime.Today);
+                DateTime today = DateTime.Today;
+
+                int dayId = DayHelper.GetDayIdByDate(today);
 
                 Day current = da.Find<Day>(dayId);
 
                 if (current == null)
                 {
-                    current = new Day(DateTime.Today);
+                    current = new Day(today);
 
                     da.Insert<Day>(current);
                 }

@@ -20,6 +20,7 @@ namespace FichadaBinser.Models
 
         [PrimaryKey]
         public int DayId { get; set; }
+
         public DateTime Date { get; private set; }
         public DateTime? EntryTime { get; set; }
         public DateTime? StartLunchTime { get; set; }
@@ -27,7 +28,7 @@ namespace FichadaBinser.Models
         public DateTime? ExitTime { get; set; }
 
         [Ignore]
-        public string TotalTime
+        public string TotalTimeString
         {
             get
             {
@@ -76,7 +77,7 @@ namespace FichadaBinser.Models
             get
             {
                 if (this.EntryTime != null)
-                    return this.EntryTime.Value.ToString("HH:mm:ss");
+                    return this.EntryTime.Value.ToLocalTime().ToString("HH:mm:ss");
 
                 return null;
             }
@@ -88,7 +89,7 @@ namespace FichadaBinser.Models
             get
             {
                 if (this.StartLunchTime != null)
-                    return this.StartLunchTime.Value.ToString("HH:mm:ss");
+                    return this.StartLunchTime.Value.ToLocalTime().ToString("HH:mm:ss");
 
                 return null;
             }
@@ -100,7 +101,7 @@ namespace FichadaBinser.Models
             get
             {
                 if (this.EndLunchTime != null)
-                    return this.EndLunchTime.Value.ToString("HH:mm:ss");
+                    return this.EndLunchTime.Value.ToLocalTime().ToString("HH:mm:ss");
 
                 return null;
             }
@@ -112,7 +113,7 @@ namespace FichadaBinser.Models
             get
             {
                 if (this.ExitTime != null)
-                    return this.ExitTime.Value.ToString("HH:mm:ss");
+                    return this.ExitTime.Value.ToLocalTime().ToString("HH:mm:ss");
 
                 return null;
             }
