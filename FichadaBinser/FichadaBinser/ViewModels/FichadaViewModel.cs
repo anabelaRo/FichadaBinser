@@ -1,4 +1,6 @@
 ﻿using FichadaBinser.Helpers;
+using FichadaBinser.Models;
+using FichadaBinser.Services;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,12 @@ namespace FichadaBinser.ViewModels
 {
     public class FichadaViewModel : BaseViewModel
     {
+        #region Services
+
+        DayDataService dayDataService;
+
+        #endregion
+
         #region Attributes
 
         private string currentDate;
@@ -36,9 +44,17 @@ namespace FichadaBinser.ViewModels
         private DateTime? internalEndLunchTime;
         private DateTime? internalExitTime;
 
+        private Day currentDay;
+
         #endregion
 
         #region Properties
+
+        public Day CurrentDay
+        {
+            get { return currentDay; }
+            set { SetValue(ref currentDay, value); }
+        }
 
         public string CurrentDate
         {
@@ -136,7 +152,11 @@ namespace FichadaBinser.ViewModels
 
         public FichadaViewModel()
         {
-            this.LoadCurrentDate();
+            this.dayDataService = new DayDataService();
+
+            this.currentDay = dayDataService.GetCurrentDay();
+
+            this.LoadCurrentDate(currentDay);
             this.LoadCurrentTime();
             this.InitializeTimer();
             this.SetButtonsEnabled();
@@ -146,9 +166,9 @@ namespace FichadaBinser.ViewModels
 
         #region Methods
 
-        private void LoadCurrentDate()
+        private void LoadCurrentDate(Day day)
         {
-            DateTime fecha = DateTime.Now;
+            DateTime fecha = day.Date;
 
             CultureInfo myCulture = new CultureInfo("es-ES");
 
@@ -357,6 +377,10 @@ namespace FichadaBinser.ViewModels
             this.internalEntryTime = DateTime.Now;
             this.EntryTime = this.internalEntryTime.Value.ToString("HH:mm:ss");
 
+            this.currentDay.EntryTime = this.internalEntryTime;
+
+            this.dayDataService.Update(this.currentDay);
+
             this.SetButtonsEnabled();
         }
 
@@ -364,6 +388,10 @@ namespace FichadaBinser.ViewModels
         {
             this.internalStartLunchTime = DateTime.Now;
             this.StartLunchTime = this.internalStartLunchTime.Value.ToString("HH:mm:ss");
+
+            this.currentDay.StartLunchTime = this.internalStartLunchTime;
+
+            this.dayDataService.Update(this.currentDay);
 
             this.SetButtonsEnabled();
         }
@@ -373,6 +401,10 @@ namespace FichadaBinser.ViewModels
             this.internalEndLunchTime = DateTime.Now;
             this.EndLunchTime = this.internalEndLunchTime.Value.ToString("HH:mm:ss");
 
+            this.currentDay.EndLunchTime = this.internalEndLunchTime;
+
+            this.dayDataService.Update(this.currentDay);
+
             this.SetButtonsEnabled();
         }
 
@@ -380,6 +412,10 @@ namespace FichadaBinser.ViewModels
         {
             this.internalExitTime = DateTime.Now;
             this.ExitTime = this.internalExitTime.Value.ToString("HH:mm:ss");
+
+            this.currentDay.ExitTime = this.internalExitTime;
+
+            this.dayDataService.Update(this.currentDay);
 
             this.SetButtonsEnabled();
         }
@@ -397,6 +433,10 @@ namespace FichadaBinser.ViewModels
             {
                 this.internalEntryTime = null;
                 this.EntryTime = string.Empty;
+
+                this.currentDay.EntryTime = this.internalEntryTime;
+
+                this.dayDataService.Update(this.currentDay);
 
                 this.SetButtonsEnabled();
             }
@@ -416,6 +456,10 @@ namespace FichadaBinser.ViewModels
                 this.internalStartLunchTime = null;
                 this.StartLunchTime = string.Empty;
 
+                this.currentDay.StartLunchTime = this.internalStartLunchTime;
+
+                this.dayDataService.Update(this.currentDay);
+
                 this.SetButtonsEnabled();
             }
         }
@@ -434,6 +478,10 @@ namespace FichadaBinser.ViewModels
                 this.internalEndLunchTime = null;
                 this.EndLunchTime = string.Empty;
 
+                this.currentDay.EndLunchTime = this.internalEndLunchTime;
+
+                this.dayDataService.Update(this.currentDay);
+
                 this.SetButtonsEnabled();
             }
         }
@@ -451,6 +499,10 @@ namespace FichadaBinser.ViewModels
             {
                 this.internalExitTime = null;
                 this.ExitTime = string.Empty;
+
+                this.currentDay.ExitTime = this.internalExitTime;
+
+                this.dayDataService.Update(this.currentDay);
 
                 this.SetButtonsEnabled();
             }

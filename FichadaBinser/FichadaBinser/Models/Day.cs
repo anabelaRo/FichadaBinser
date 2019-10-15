@@ -1,15 +1,32 @@
-﻿using System;
+﻿using FichadaBinser.Helpers;
+using SQLite.Net.Attributes;
+using System;
 
 namespace FichadaBinser.Models
 {
     public class Day
     {
-        public DateTime Date { get; set; }
+        public Day()
+        {
+
+        }
+
+        public Day(DateTime date)
+        {
+            this.DayId = DayHelper.GetDayIdByDate(date);
+
+            this.Date = date;
+        }
+
+        [PrimaryKey]
+        public int DayId { get; set; }
+        public DateTime Date { get; private set; }
         public DateTime? EntryTime { get; set; }
         public DateTime? StartLunchTime { get; set; }
         public DateTime? EndLunchTime { get; set; }
         public DateTime? ExitTime { get; set; }
 
+        [Ignore]
         public string TotalTime
         {
             get
@@ -51,6 +68,59 @@ namespace FichadaBinser.Models
 
                 return time.ToString(@"hh\:mm\:ss");
             }
+        }
+
+        [Ignore]
+        public string EntryTimeString
+        {
+            get
+            {
+                if (this.EntryTime != null)
+                    return this.EntryTime.Value.ToString("HH:mm:ss");
+
+                return null;
+            }
+        }
+
+        [Ignore]
+        public string StartLunchTimeString
+        {
+            get
+            {
+                if (this.StartLunchTime != null)
+                    return this.StartLunchTime.Value.ToString("HH:mm:ss");
+
+                return null;
+            }
+        }
+
+        [Ignore]
+        public string EndLunchTimeString
+        {
+            get
+            {
+                if (this.EndLunchTime != null)
+                    return this.EndLunchTime.Value.ToString("HH:mm:ss");
+
+                return null;
+            }
+        }
+
+        [Ignore]
+        public string ExitTimeString
+        {
+            get
+            {
+                if (this.ExitTime != null)
+                    return this.ExitTime.Value.ToString("HH:mm:ss");
+
+                return null;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return this.DayId;
         }
     }
 }
