@@ -14,12 +14,6 @@ namespace FichadaBinser.ViewModels
 {
     public class FichadaViewModel : BaseViewModel, ITimerViewModel
     {
-        #region Services
-
-        DayDataService dayDataService;
-
-        #endregion
-
         #region Attributes
 
         private string currentDate;
@@ -148,10 +142,6 @@ namespace FichadaBinser.ViewModels
 
         public FichadaViewModel()
         {
-            this.dayDataService = new DayDataService();
-
-            //this.currentDay = dayDataService.GetCurrentDay();
-
             this.LoadCurrentDate();
             this.LoadCurrentTime();
             this.SetButtonsEnabled();
@@ -188,7 +178,7 @@ namespace FichadaBinser.ViewModels
 
         private void LoadCurrentTime()
         {
-            this.CurrentTime = DateTime.Now.ToString("HH:mm:ss");
+            this.CurrentTime = DateTime.Now.ToLocalTime().ToString("HH:mm:ss");
         }
 
         private void SetButtonsEnabled()
@@ -330,7 +320,7 @@ namespace FichadaBinser.ViewModels
         {
             this.CurrentDay.EntryTime = DateTime.Now.ToLocalTime();
 
-            this.dayDataService.Update(this.CurrentDay);
+            MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
 
             this.SetButtonsEnabled();
             this.RefreshView();
@@ -340,7 +330,7 @@ namespace FichadaBinser.ViewModels
         {
             this.CurrentDay.StartLunchTime = DateTime.Now.ToLocalTime();
 
-            this.dayDataService.Update(this.CurrentDay);
+            MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
 
             this.SetButtonsEnabled();
             this.RefreshView();
@@ -350,7 +340,7 @@ namespace FichadaBinser.ViewModels
         {
             this.CurrentDay.EndLunchTime = DateTime.Now.ToLocalTime();
 
-            this.dayDataService.Update(this.CurrentDay);
+            MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
 
             this.SetButtonsEnabled();
             this.RefreshView();
@@ -360,7 +350,7 @@ namespace FichadaBinser.ViewModels
         {
             this.CurrentDay.ExitTime = DateTime.Now.ToLocalTime();
 
-            this.dayDataService.Update(this.CurrentDay);
+            MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
 
             this.SetButtonsEnabled();
             this.RefreshView();
@@ -379,7 +369,7 @@ namespace FichadaBinser.ViewModels
             {
                 this.CurrentDay.EntryTime = null;
 
-                this.dayDataService.Update(this.CurrentDay);
+                MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
 
                 this.SetButtonsEnabled();
                 this.RefreshView();
@@ -399,7 +389,7 @@ namespace FichadaBinser.ViewModels
             {
                 this.CurrentDay.StartLunchTime = null;
 
-                this.dayDataService.Update(this.CurrentDay);
+                MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
 
                 this.SetButtonsEnabled();
                 this.RefreshView();
@@ -419,7 +409,7 @@ namespace FichadaBinser.ViewModels
             {
                 this.CurrentDay.EndLunchTime = null;
 
-                this.dayDataService.Update(this.CurrentDay);
+                MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
 
                 this.SetButtonsEnabled();
                 this.RefreshView();
@@ -439,7 +429,7 @@ namespace FichadaBinser.ViewModels
             {
                 this.CurrentDay.ExitTime = null;
 
-                this.dayDataService.Update(this.CurrentDay);
+                MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
 
                 this.SetButtonsEnabled();
                 this.RefreshView();

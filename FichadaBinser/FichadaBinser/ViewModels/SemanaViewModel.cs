@@ -17,6 +17,8 @@ namespace FichadaBinser.ViewModels
         private string totalTimeWednesdayString;
         private string totalTimeThursdayString;
         private string totalTimeFridayString;
+        private string totalTimeSaturdayString;
+        private string totalTimeSundayString;
         private string totalTime;
 
         #endregion
@@ -53,6 +55,18 @@ namespace FichadaBinser.ViewModels
             set { SetValue(ref totalTimeFridayString, value); }
         }
 
+        public string TotalTimeSaturdayString
+        {
+            get { return totalTimeSaturdayString; }
+            set { SetValue(ref totalTimeSaturdayString, value); }
+        }
+
+        public string TotalTimeSundayString
+        {
+            get { return totalTimeSundayString; }
+            set { SetValue(ref totalTimeSundayString, value); }
+        }
+
         public string TotalTime
         {
             get { return totalTime; }
@@ -87,12 +101,16 @@ namespace FichadaBinser.ViewModels
             Day wednesday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Wednesday).FirstOrDefault();
             Day thursday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Thursday).FirstOrDefault();
             Day friday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Friday).FirstOrDefault();
+            Day saturday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Saturday).FirstOrDefault();
+            Day sunday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Sunday).FirstOrDefault();
 
             this.TotalTimeMondayString = monday != null ? monday.TotalTimeString : "-";
             this.TotalTimeTuesdayString = tuesday != null ? tuesday.TotalTimeString : "-";
             this.TotalTimeWednesdayString = wednesday != null ? wednesday.TotalTimeString : "-";
             this.TotalTimeThursdayString = thursday != null ? thursday.TotalTimeString : "-";
             this.TotalTimeFridayString = friday != null ? friday.TotalTimeString : "-";
+            this.TotalTimeSaturdayString = saturday != null ? saturday.TotalTimeString : "-";
+            this.TotalTimeSundayString = sunday != null ? sunday.TotalTimeString : "-";
         }
 
         private void LoadTotalTime(List<Day> weekDays)

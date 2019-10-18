@@ -11,8 +11,10 @@ namespace FichadaBinser
         {
             InitializeComponent();
 
-           //MainPage = new NavigationPage(new FichadaPage());
-           MainPage = new NavigationPage(new SemanaPage());
+            //MainPage = new NavigationPage(new FichadaPage());
+            //MainPage = new NavigationPage(new SemanaPage());
+
+            MainPage = new NavigationPage(new FichadaTabbedPage());
         }
 
         protected override void OnStart()

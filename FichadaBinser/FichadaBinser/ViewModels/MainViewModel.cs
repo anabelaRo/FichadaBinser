@@ -34,6 +34,8 @@ namespace FichadaBinser.ViewModels
         public Day CurrentDay;
         public List<Day> WeekDays;
 
+        private bool IsDirty;
+
         #endregion
 
         #region ViewModels
@@ -62,6 +64,8 @@ namespace FichadaBinser.ViewModels
 
         #endregion
 
+        #region Methods
+
         private void InitializeTimer()
         {
             var viewModels = new ITimerViewModel[] { this.Fichada, this.Semana };
@@ -75,10 +79,26 @@ namespace FichadaBinser.ViewModels
 
         private void DoTimerAction(IEnumerable<ITimerViewModel> viewModels)
         {
+            if (this.IsDirty)
+            {
+                this.WeekDays = this.dayDataService.GetCurrentWeekDays();
+
+                this.IsDirty = false;
+            }
+
             foreach (ITimerViewModel timerViewModel in viewModels)
             {
                 timerViewModel.DoTimerAction();
             }
         }
+
+        public void UpdateDay(Day day)
+        {
+            this.dayDataService.Update(day);
+
+            this.IsDirty = true;
+        }
+
+        #endregion
     }
 }
