@@ -1,4 +1,11 @@
-﻿namespace FichadaBinser.ViewModels
+﻿using FichadaBinser.Interfaces;
+using FichadaBinser.Models;
+using FichadaBinser.Services;
+using System;
+using System.Collections.Generic;
+using Xamarin.Forms;
+
+namespace FichadaBinser.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
@@ -16,6 +23,19 @@
 
         #endregion
 
+        #region Services
+
+        DayDataService dayDataService;
+
+        #endregion
+
+        #region Properties
+
+        public Day CurrentDay;
+        public List<Day> WeekDays;
+
+        #endregion
+
         #region ViewModels
 
         public FichadaViewModel Fichada { get; set; }
@@ -29,10 +49,36 @@
         {
             instance = this;
 
+            this.dayDataService = new DayDataService();
+
+            this.CurrentDay = dayDataService.GetCurrentDay();
+            this.WeekDays = this.dayDataService.GetCurrentWeekDays();
+
             this.Fichada = new FichadaViewModel();
             this.Semana = new SemanaViewModel();
+
+            this.InitializeTimer();
         }
 
         #endregion
+
+        private void InitializeTimer()
+        {
+            var viewModels = new ITimerViewModel[] { this.Fichada, this.Semana };
+
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                Device.BeginInvokeOnMainThread(() => this.DoTimerAction(viewModels));
+                return true;
+            });
+        }
+
+        private void DoTimerAction(IEnumerable<ITimerViewModel> viewModels)
+        {
+            foreach (ITimerViewModel timerViewModel in viewModels)
+            {
+                timerViewModel.DoTimerAction();
+            }
+        }
     }
 }

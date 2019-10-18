@@ -4,17 +4,12 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using FichadaBinser.Interfaces;
 
 namespace FichadaBinser.ViewModels
 {
-    public class SemanaViewModel : BaseViewModel
+    public class SemanaViewModel : BaseViewModel, ITimerViewModel
     {
-        #region Services
-
-        DayDataService dayDataService;
-
-        #endregion
-
         #region Attributes
 
         private string totalTimeMondayString;
@@ -23,12 +18,6 @@ namespace FichadaBinser.ViewModels
         private string totalTimeThursdayString;
         private string totalTimeFridayString;
         private string totalTime;
-
-        private Day dayMonday;
-        private Day dayTuesday;
-        private Day dayWednesday;
-        private Day dayThursday;
-        private Day dayFriday;
 
         #endregion
 
@@ -70,39 +59,45 @@ namespace FichadaBinser.ViewModels
             set { SetValue(ref totalTime, value); }
         }
 
-
         #endregion
 
         #region Constructor
 
         public SemanaViewModel()
         {
-            this.dayDataService = new DayDataService();
 
-            this.LoadWeekDays();
         }
 
         #endregion
 
         #region Methods
 
-        private void LoadWeekDays()
+        public void DoTimerAction()
         {
-            List<Day> days = this.dayDataService.GetCurrentWeekDays();
+            List<Day> weekDays = MainViewModel.GetInstance().WeekDays;
 
-            Day monday = days.Where(x => x.Date.DayOfWeek == DayOfWeek.Monday).FirstOrDefault();
-            Day tuesday = days.Where(x => x.Date.DayOfWeek == DayOfWeek.Tuesday).FirstOrDefault();
-            Day wednesday = days.Where(x => x.Date.DayOfWeek == DayOfWeek.Wednesday).FirstOrDefault();
-            Day thursday = days.Where(x => x.Date.DayOfWeek == DayOfWeek.Thursday).FirstOrDefault();
-            Day friday = days.Where(x => x.Date.DayOfWeek == DayOfWeek.Friday).FirstOrDefault();
+            this.LoadWeekDays(weekDays);
+            this.LoadTotalTime(weekDays);
+        }
 
-            this.TotalTimeMondayString = monday != null ? monday.TotalTimeString : string.Empty;
-            this.TotalTimeTuesdayString = tuesday != null ? tuesday.TotalTimeString : string.Empty;
-            this.TotalTimeWednesdayString = wednesday != null ? wednesday.TotalTimeString : string.Empty;
-            this.TotalTimeThursdayString = thursday != null ? thursday.TotalTimeString : string.Empty;
-            this.TotalTimeFridayString = friday != null ? friday.TotalTimeString : string.Empty;
+        private void LoadWeekDays(List<Day> weekDays)
+        {
+            Day monday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Monday).FirstOrDefault();
+            Day tuesday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Tuesday).FirstOrDefault();
+            Day wednesday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Wednesday).FirstOrDefault();
+            Day thursday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Thursday).FirstOrDefault();
+            Day friday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Friday).FirstOrDefault();
 
-            int totalSeconds = days.Sum(x => x.TotalTime);
+            this.TotalTimeMondayString = monday != null ? monday.TotalTimeString : "-";
+            this.TotalTimeTuesdayString = tuesday != null ? tuesday.TotalTimeString : "-";
+            this.TotalTimeWednesdayString = wednesday != null ? wednesday.TotalTimeString : "-";
+            this.TotalTimeThursdayString = thursday != null ? thursday.TotalTimeString : "-";
+            this.TotalTimeFridayString = friday != null ? friday.TotalTimeString : "-";
+        }
+
+        private void LoadTotalTime(List<Day> weekDays)
+        {
+            int totalSeconds = weekDays.Sum(x => x.TotalTime);
 
             TimeSpan time = TimeSpan.FromSeconds(totalSeconds);
 

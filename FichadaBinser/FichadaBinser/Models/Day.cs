@@ -37,17 +37,17 @@ namespace FichadaBinser.Models
                 {
                     if (this.StartLunchTime != null)
                     {
-                        totalSeconds += Convert.ToInt32(this.StartLunchTime.Value.Subtract(this.EntryTime.Value).TotalSeconds);
+                        totalSeconds += Convert.ToInt32(this.StartLunchTime.Value.ToLocalTime().Subtract(this.EntryTime.Value.ToLocalTime()).TotalSeconds);
 
                         if (this.EndLunchTime != null)
                         {
                             if (this.ExitTime != null)
                             {
-                                totalSeconds += Convert.ToInt32(this.ExitTime.Value.Subtract(this.EndLunchTime.Value).TotalSeconds);
+                                totalSeconds += Convert.ToInt32(this.ExitTime.Value.ToLocalTime().Subtract(this.EndLunchTime.Value.ToLocalTime()).TotalSeconds);
                             }
                             else
                             {
-                                totalSeconds += Convert.ToInt32(DateTime.Now.Subtract(this.EndLunchTime.Value).TotalSeconds);
+                                totalSeconds += Convert.ToInt32(DateTime.Now.ToLocalTime().Subtract(this.EndLunchTime.Value.ToLocalTime()).TotalSeconds);
                             }
                         }
                     }
@@ -55,11 +55,11 @@ namespace FichadaBinser.Models
                     {
                         if (this.ExitTime != null)
                         {
-                            totalSeconds += Convert.ToInt32(this.ExitTime.Value.Subtract(this.EntryTime.Value).TotalSeconds);
+                            totalSeconds += Convert.ToInt32(this.ExitTime.Value.ToLocalTime().Subtract(this.EntryTime.Value.ToLocalTime()).TotalSeconds);
                         }
                         else
                         {
-                            totalSeconds += Convert.ToInt32(DateTime.Now.Subtract(this.EntryTime.Value).TotalSeconds);
+                            totalSeconds += Convert.ToInt32(DateTime.Now.ToLocalTime().Subtract(this.EntryTime.Value.ToLocalTime()).TotalSeconds);
                         }
                     }
                 }
