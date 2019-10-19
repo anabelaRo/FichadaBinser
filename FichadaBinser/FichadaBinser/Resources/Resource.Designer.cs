@@ -106,6 +106,15 @@ namespace FichadaBinser.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Desea guardar los cambios?.
+        /// </summary>
+        public static string ConfirmSaveChanges {
+            get {
+                return ResourceManager.GetString("ConfirmSaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {

@@ -47,5 +47,10 @@
         {
             get { return Resource.No; }
         }
+
+        public static string ConfirmSaveChanges
+        {
+            get { return Resource.ConfirmSaveChanges; }
+        }
     }
 }

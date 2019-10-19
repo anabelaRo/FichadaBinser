@@ -22,7 +22,7 @@
                 {
                     current = new Day(today);
 
-                    da.Insert<Day>(current);
+                    this.Insert(current);
                 }
 
                 return current;
@@ -37,10 +37,21 @@
             }
         }
 
+        public void Insert(Day day)
+        {
+            if (day.DayId == null)
+                day.DayId = DayHelper.GetDayIdByDate(day.Date);
+
+            using (var da = new DataAccess())
+            {
+                da.Insert<Day>(day);
+            }
+        }
+
         public List<Day> GetCurrentWeekDays()
         {
             var startDate = DateTime.Today.ToUniversalTime().AddDays(-(((DateTime.Today.ToUniversalTime().DayOfWeek - DayOfWeek.Monday) + 7) % 7));
-            var endDate = startDate.AddDays(5);
+            var endDate = startDate.AddDays(7);
 
             var numDays = (int)((endDate - startDate).TotalDays);
 
@@ -61,6 +72,8 @@
 
                     if (day != null)
                         weekDays.Add(day);
+                    else
+                        weekDays.Add(new Day(date));
                 }
             }
 

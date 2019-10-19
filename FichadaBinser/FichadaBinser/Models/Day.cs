@@ -13,13 +13,11 @@ namespace FichadaBinser.Models
 
         public Day(DateTime date)
         {
-            this.DayId = DayHelper.GetDayIdByDate(date);
-
             this.Date = date;
         }
 
         [PrimaryKey]
-        public int DayId { get; set; }
+        public int? DayId { get; set; }
 
         public DateTime Date { get; private set; }
         public DateTime? EntryTime { get; set; }
@@ -129,7 +127,9 @@ namespace FichadaBinser.Models
 
         public override int GetHashCode()
         {
-            return this.DayId;
+            return this.DayId != null 
+                ? (int)this.DayId 
+                : 0;
         }
     }
 }

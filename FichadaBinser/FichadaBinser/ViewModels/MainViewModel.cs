@@ -42,6 +42,7 @@ namespace FichadaBinser.ViewModels
 
         public FichadaViewModel Fichada { get; set; }
         public SemanaViewModel Semana { get; set; }
+        public EditarDiaViewModel EditarDia { get; set; }
 
         #endregion
 
@@ -92,9 +93,12 @@ namespace FichadaBinser.ViewModels
             }
         }
 
-        public void UpdateDay(Day day)
+        public void SaveToDataBase(Day day)
         {
-            this.dayDataService.Update(day);
+            if (day.DayId != null)
+                this.dayDataService.Update(day);
+            else
+                this.dayDataService.Insert(day);
 
             this.IsDirty = true;
         }

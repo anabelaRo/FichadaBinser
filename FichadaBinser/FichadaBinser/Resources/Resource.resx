@@ -132,6 +132,9 @@
   <data name="ConfirmCancelStartLunch" xml:space="preserve">
     <value>¿Desea cancelar el Fin de Almuerzo?</value>
   </data>
+  <data name="ConfirmSaveChanges" xml:space="preserve">
+    <value>¿Desea guardar los cambios?</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>

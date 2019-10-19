@@ -22,6 +22,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\EditarDiaPage.xaml.cs">
+      <DependentUpon>EditarDiaPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\FichadaPage.xaml.cs">
       <DependentUpon>FichadaPage.xaml</DependentUpon>
     </Compile>

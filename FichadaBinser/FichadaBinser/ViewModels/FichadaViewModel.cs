@@ -14,14 +14,6 @@ namespace FichadaBinser.ViewModels
 {
     public class FichadaViewModel : BaseViewModel, ITimerViewModel
     {
-        //private TimeSpan entryTimeSpan;
-
-        //public TimeSpan EntryTimeSpan
-        //{
-        //    get { return entryTimeSpan; }
-        //    set { SetValue(ref entryTimeSpan, value); }
-        //}
-
         #region Attributes
 
         private string currentDate;
@@ -360,7 +352,7 @@ namespace FichadaBinser.ViewModels
         {
             this.CurrentDay.EntryTime = DateTime.Now.ToLocalTime();
 
-            MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
+            MainViewModel.GetInstance().SaveToDataBase(this.CurrentDay);
 
             this.SetButtonsEnabled();
             this.RefreshView();
@@ -370,7 +362,7 @@ namespace FichadaBinser.ViewModels
         {
             this.CurrentDay.StartLunchTime = DateTime.Now.ToLocalTime();
 
-            MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
+            MainViewModel.GetInstance().SaveToDataBase(this.CurrentDay);
 
             this.SetButtonsEnabled();
             this.RefreshView();
@@ -380,7 +372,7 @@ namespace FichadaBinser.ViewModels
         {
             this.CurrentDay.EndLunchTime = DateTime.Now.ToLocalTime();
 
-            MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
+            MainViewModel.GetInstance().SaveToDataBase(this.CurrentDay);
 
             this.SetButtonsEnabled();
             this.RefreshView();
@@ -390,7 +382,7 @@ namespace FichadaBinser.ViewModels
         {
             this.CurrentDay.ExitTime = DateTime.Now.ToLocalTime();
 
-            MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
+            MainViewModel.GetInstance().SaveToDataBase(this.CurrentDay);
 
             this.SetButtonsEnabled();
             this.RefreshView();
@@ -409,7 +401,7 @@ namespace FichadaBinser.ViewModels
             {
                 this.CurrentDay.EntryTime = null;
 
-                MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
+                MainViewModel.GetInstance().SaveToDataBase(this.CurrentDay);
 
                 this.SetButtonsEnabled();
                 this.RefreshView();
@@ -429,7 +421,7 @@ namespace FichadaBinser.ViewModels
             {
                 this.CurrentDay.StartLunchTime = null;
 
-                MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
+                MainViewModel.GetInstance().SaveToDataBase(this.CurrentDay);
 
                 this.SetButtonsEnabled();
                 this.RefreshView();
@@ -449,7 +441,7 @@ namespace FichadaBinser.ViewModels
             {
                 this.CurrentDay.EndLunchTime = null;
 
-                MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
+                MainViewModel.GetInstance().SaveToDataBase(this.CurrentDay);
 
                 this.SetButtonsEnabled();
                 this.RefreshView();
@@ -469,7 +461,7 @@ namespace FichadaBinser.ViewModels
             {
                 this.CurrentDay.ExitTime = null;
 
-                MainViewModel.GetInstance().UpdateDay(this.CurrentDay);
+                MainViewModel.GetInstance().SaveToDataBase(this.CurrentDay);
 
                 this.SetButtonsEnabled();
                 this.RefreshView();

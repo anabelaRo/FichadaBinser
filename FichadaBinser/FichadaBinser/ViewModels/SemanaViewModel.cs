@@ -1,14 +1,14 @@
-﻿using FichadaBinser.Models;
-using FichadaBinser.Services;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
+﻿using FichadaBinser.Helpers;
 using FichadaBinser.Interfaces;
-using System.Windows.Input;
+using FichadaBinser.Models;
+using FichadaBinser.Views;
 using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
-using FichadaBinser.Helpers;
 
 namespace FichadaBinser.ViewModels
 {
@@ -148,58 +148,51 @@ namespace FichadaBinser.ViewModels
 
         private async void TotalTimeMonday()
         {
-            var response = await Application.Current.MainPage.DisplayActionSheet(
-                "Edit",
-                Languages.Cancel,
-                null);
+            Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Monday).FirstOrDefault();
+
+            await this.EditDayTimes(day);
         }
 
         private async void TotalTimeTuesday()
         {
-            var response = await Application.Current.MainPage.DisplayActionSheet(
-                "Edit",
-                Languages.Cancel,
-                null);
+            Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Tuesday).FirstOrDefault();
+
+            await this.EditDayTimes(day);
         }
 
         private async void TotalTimeWednesday()
         {
-            var response = await Application.Current.MainPage.DisplayActionSheet(
-                "Edit",
-                Languages.Cancel,
-                null);
+            Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Wednesday).FirstOrDefault();
+
+            await this.EditDayTimes(day);
         }
 
         private async void TotalTimeThursday()
         {
-            var response = await Application.Current.MainPage.DisplayActionSheet(
-                "Edit",
-                Languages.Cancel,
-                null);
+            Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Thursday).FirstOrDefault();
+
+            await this.EditDayTimes(day);
         }
 
         private async void TotalTimeFriday()
         {
-            var response = await Application.Current.MainPage.DisplayActionSheet(
-                "Edit",
-                Languages.Cancel,
-                null);
+            Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Friday).FirstOrDefault();
+
+            await this.EditDayTimes(day);
         }
 
         private async void TotalTimeSaturday()
         {
-            var response = await Application.Current.MainPage.DisplayActionSheet(
-                "Edit",
-                Languages.Cancel,
-                null);
+            Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Saturday).FirstOrDefault();
+
+            await this.EditDayTimes(day);
         }
 
         private async void TotalTimeSunday()
         {
-            var response = await Application.Current.MainPage.DisplayActionSheet(
-                "Edit",
-                Languages.Cancel,
-                null);
+            Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Sunday).FirstOrDefault();
+
+            await this.EditDayTimes(day);
         }
 
         #endregion
@@ -216,21 +209,13 @@ namespace FichadaBinser.ViewModels
 
         private void LoadWeekDays(List<Day> weekDays)
         {
-            Day monday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Monday).FirstOrDefault();
-            Day tuesday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Tuesday).FirstOrDefault();
-            Day wednesday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Wednesday).FirstOrDefault();
-            Day thursday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Thursday).FirstOrDefault();
-            Day friday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Friday).FirstOrDefault();
-            Day saturday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Saturday).FirstOrDefault();
-            Day sunday = weekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Sunday).FirstOrDefault();
-
-            this.TotalTimeMondayString = monday != null ? monday.TotalTimeString : "-";
-            this.TotalTimeTuesdayString = tuesday != null ? tuesday.TotalTimeString : "-";
-            this.TotalTimeWednesdayString = wednesday != null ? wednesday.TotalTimeString : "-";
-            this.TotalTimeThursdayString = thursday != null ? thursday.TotalTimeString : "-";
-            this.TotalTimeFridayString = friday != null ? friday.TotalTimeString : "-";
-            this.TotalTimeSaturdayString = saturday != null ? saturday.TotalTimeString : "-";
-            this.TotalTimeSundayString = sunday != null ? sunday.TotalTimeString : "-";
+            this.TotalTimeMondayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Monday);
+            this.TotalTimeTuesdayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Tuesday);
+            this.TotalTimeWednesdayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Wednesday);
+            this.TotalTimeThursdayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Thursday);
+            this.TotalTimeFridayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Friday);
+            this.TotalTimeSaturdayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Saturday);
+            this.TotalTimeSundayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Sunday);
         }
 
         private void LoadTotalTime(List<Day> weekDays)
@@ -239,7 +224,31 @@ namespace FichadaBinser.ViewModels
 
             TimeSpan time = TimeSpan.FromSeconds(totalSeconds);
 
-            this.TotalTime = time.ToString(@"hh\:mm\:ss");
+            //this.TotalTime = time.ToString(@"HH\:mm\:ss");
+
+            this.TotalTime = string.Format(
+                    "{0:00}:{1:00}:{2:00}",
+                    (int)time.TotalHours,
+                    time.Minutes,
+                    time.Seconds
+                );
+        }
+
+        private string GetDayTotalTimeForLabel(List<Day> weekDays, DayOfWeek dayOfWeek)
+        {
+            Day day = weekDays.Where(x => x.Date.DayOfWeek == dayOfWeek).FirstOrDefault();
+
+            if (day != null && day.TotalTime != 0)
+                return day.TotalTimeString;
+            else
+                return "-";
+        }
+
+        private async Task EditDayTimes(Day day)
+        {
+            MainViewModel.GetInstance().EditarDia = new EditarDiaViewModel(day);
+
+            await Application.Current.MainPage.Navigation.PushAsync(new EditarDiaPage());
         }
 
         #endregion

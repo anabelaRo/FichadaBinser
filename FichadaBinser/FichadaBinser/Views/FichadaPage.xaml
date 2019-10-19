@@ -82,13 +82,6 @@
                         Text="Hora Ingreso"
                         VerticalOptions="Center">
                     </Label>
-                    <!--<TimePicker 
-                    VerticalOptions="CenterAndExpand"
-                    Time="{Binding EntryTimeSpan, Mode=TwoWay}"
-                    FontSize="Micro"
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    Format="HH:mm:ss"/>-->
                     <Label
                         Grid.Column="1"
                         Grid.Row="0"
