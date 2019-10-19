@@ -115,11 +115,101 @@ namespace FichadaBinser.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Horario Incorrecto.
+        /// </summary>
+        public static string IncorrectTime {
+            get {
+                return ResourceManager.GetString("IncorrectTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complete el horario de fin de almuerzo..
+        /// </summary>
+        public static string ValidationCompleteEndLunchTime {
+            get {
+                return ResourceManager.GetString("ValidationCompleteEndLunchTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complete el horario de ingreso..
+        /// </summary>
+        public static string ValidationCompleteEntryTime {
+            get {
+                return ResourceManager.GetString("ValidationCompleteEntryTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complete el horario de egreso..
+        /// </summary>
+        public static string ValidationCompleteExitTime {
+            get {
+                return ResourceManager.GetString("ValidationCompleteExitTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El horario de ingreso no puede ser mayor al horario de egreso..
+        /// </summary>
+        public static string ValidationEntryTimeGreaterThanExitTime {
+            get {
+                return ResourceManager.GetString("ValidationEntryTimeGreaterThanExitTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El horario de ingreso no puede ser mayor al horario de inicio de almuerzo..
+        /// </summary>
+        public static string ValidationEntryTimeGreaterThanStartLunchTime {
+            get {
+                return ResourceManager.GetString("ValidationEntryTimeGreaterThanStartLunchTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Horario inválido..
+        /// </summary>
+        public static string ValidationInvalidTime {
+            get {
+                return ResourceManager.GetString("ValidationInvalidTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El horario de inicio de almuerzo no puede ser mayor al horario de fin de almuerzo..
+        /// </summary>
+        public static string ValidationStartLunchTimeGreaterThanEndLunchTime {
+            get {
+                return ResourceManager.GetString("ValidationStartLunchTimeGreaterThanEndLunchTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El horario de inicio de almuerzo no puede ser mayor al horario egreso..
+        /// </summary>
+        public static string ValidationStartLunchTimeGreaterThanExitTime {
+            get {
+                return ResourceManager.GetString("ValidationStartLunchTimeGreaterThanExitTime", resourceCulture);
             }
         }
         

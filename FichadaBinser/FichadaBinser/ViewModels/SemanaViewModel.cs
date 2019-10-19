@@ -224,8 +224,6 @@ namespace FichadaBinser.ViewModels
 
             TimeSpan time = TimeSpan.FromSeconds(totalSeconds);
 
-            //this.TotalTime = time.ToString(@"HH\:mm\:ss");
-
             this.TotalTime = string.Format(
                     "{0:00}:{1:00}:{2:00}",
                     (int)time.TotalHours,

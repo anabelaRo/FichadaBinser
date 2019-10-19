@@ -52,5 +52,55 @@
         {
             get { return Resource.ConfirmSaveChanges; }
         }
+
+        public static string ValidationCompleteEntryTime
+        {
+            get { return Resource.ValidationCompleteEntryTime; }
+        }
+
+        public static string ValidationCompleteExitTime
+        {
+            get { return Resource.ValidationCompleteExitTime; }
+        }
+
+        public static string ValidationInvalidTime
+        {
+            get { return Resource.ValidationInvalidTime; }
+        }
+
+        public static string ValidationCompleteEndLunchTime
+        {
+            get { return Resource.ValidationCompleteEndLunchTime; }
+        }
+
+        public static string ValidationEntryTimeGreaterThanExitTime
+        {
+            get { return Resource.ValidationEntryTimeGreaterThanExitTime; }
+        }
+
+        public static string ValidationEntryTimeGreaterThanStartLunchTime
+        {
+            get { return Resource.ValidationEntryTimeGreaterThanStartLunchTime; }
+        }
+
+        public static string ValidationStartLunchTimeGreaterThanEndLunchTime
+        {
+            get { return Resource.ValidationStartLunchTimeGreaterThanEndLunchTime; }
+        }
+
+        public static string ValidationStartLunchTimeGreaterThanExitTime
+        {
+            get { return Resource.ValidationStartLunchTimeGreaterThanExitTime; }
+        }
+
+        public static string IncorrectTime
+        {
+            get { return Resource.IncorrectTime; }
+        }
+
+        public static string Ok
+        {
+            get { return Resource.Ok; }
+        }
     }
 }

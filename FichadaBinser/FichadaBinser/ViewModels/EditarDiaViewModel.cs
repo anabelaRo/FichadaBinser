@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -100,6 +101,9 @@ namespace FichadaBinser.ViewModels
 
         public async void Save()
         {
+            if (!this.ValidateTimes())
+                return;
+
             var source = await Application.Current.MainPage.DisplayActionSheet(
                 Languages.ConfirmSaveChanges,
                 Languages.Cancel,
@@ -175,6 +179,108 @@ namespace FichadaBinser.ViewModels
                 timeSpan.Hours,
                 timeSpan.Minutes,
                 timeSpan.Seconds);
+        }
+
+        #endregion
+
+        #region Validations
+
+
+        private bool ValidateTimes()
+        {
+            DateTime? entryTime = this.GetDateTime(this.EntryTimeSpan);
+            DateTime? startLunchTime = this.GetDateTime(this.StartLunchTimeSpan);
+            DateTime? endLunchTime = this.GetDateTime(this.EndLunchTimeSpan);
+            DateTime? exitTime = this.GetDateTime(this.ExitTimeSpan);
+
+            bool isCurrentDate = (this.DayShowing.Date.ToLocalTime() == DateTime.Today.Date.ToLocalTime());
+
+            if (entryTime == null)
+            {
+                Application.Current.MainPage.DisplayAlert(
+                    Languages.IncorrectTime,
+                    Languages.ValidationCompleteEntryTime,
+                    Languages.Ok);
+
+                return false;
+            }
+
+            if (!isCurrentDate)
+            {
+                if (exitTime == null)
+                {
+                    Application.Current.MainPage.DisplayAlert(
+                        Languages.IncorrectTime,
+                        Languages.ValidationCompleteExitTime,
+                        Languages.Ok);
+
+                    return false;
+                }
+
+                if (startLunchTime != null && endLunchTime == null)
+                {
+                    Application.Current.MainPage.DisplayAlert(
+                        Languages.IncorrectTime,
+                        Languages.ValidationCompleteEndLunchTime,
+                        Languages.Ok);
+
+                    return false;
+                }
+            }
+
+            if (entryTime != null && exitTime != null)
+            {
+                if (entryTime > exitTime)
+                {
+                    Application.Current.MainPage.DisplayAlert(
+                        Languages.IncorrectTime,
+                        Languages.ValidationEntryTimeGreaterThanExitTime,
+                        Languages.Ok);
+
+                    return false;
+                }
+            }
+
+            if (entryTime != null && startLunchTime != null)
+            {
+                if (entryTime > startLunchTime)
+                {
+                    Application.Current.MainPage.DisplayAlert(
+                        Languages.IncorrectTime,
+                        Languages.ValidationEntryTimeGreaterThanStartLunchTime,
+                        Languages.Ok);
+
+                    return false;
+                }
+            }
+
+            if (startLunchTime != null && endLunchTime != null)
+            {
+                if (startLunchTime > endLunchTime)
+                {
+                    Application.Current.MainPage.DisplayAlert(
+                        Languages.IncorrectTime,
+                        Languages.ValidationStartLunchTimeGreaterThanEndLunchTime,
+                        Languages.Ok);
+
+                    return false;
+                }
+            }
+
+            if (endLunchTime != null && exitTime != null)
+            {
+                if (endLunchTime > exitTime)
+                {
+                    Application.Current.MainPage.DisplayAlert(
+                        Languages.IncorrectTime,
+                        Languages.ValidationStartLunchTimeGreaterThanExitTime,
+                        Languages.Ok);
+
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         #endregion

@@ -135,8 +135,38 @@
   <data name="ConfirmSaveChanges" xml:space="preserve">
     <value>¿Desea guardar los cambios?</value>
   </data>
+  <data name="IncorrectTime" xml:space="preserve">
+    <value>Horario Incorrecto</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="ValidationCompleteEndLunchTime" xml:space="preserve">
+    <value>Complete el horario de fin de almuerzo.</value>
+  </data>
+  <data name="ValidationCompleteEntryTime" xml:space="preserve">
+    <value>Complete el horario de ingreso.</value>
+  </data>
+  <data name="ValidationCompleteExitTime" xml:space="preserve">
+    <value>Complete el horario de egreso.</value>
+  </data>
+  <data name="ValidationEntryTimeGreaterThanExitTime" xml:space="preserve">
+    <value>El horario de ingreso no puede ser mayor al horario de egreso.</value>
+  </data>
+  <data name="ValidationEntryTimeGreaterThanStartLunchTime" xml:space="preserve">
+    <value>El horario de ingreso no puede ser mayor al horario de inicio de almuerzo.</value>
+  </data>
+  <data name="ValidationInvalidTime" xml:space="preserve">
+    <value>Horario inválido.</value>
+  </data>
+  <data name="ValidationStartLunchTimeGreaterThanEndLunchTime" xml:space="preserve">
+    <value>El horario de inicio de almuerzo no puede ser mayor al horario de fin de almuerzo.</value>
+  </data>
+  <data name="ValidationStartLunchTimeGreaterThanExitTime" xml:space="preserve">
+    <value>El horario de inicio de almuerzo no puede ser mayor al horario egreso.</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Si</value>
