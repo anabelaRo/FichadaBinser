@@ -152,11 +152,18 @@ namespace FichadaBinser.ViewModels
 
         #region Methods
 
-        public void DoTimerAction()
+        public void DoTimerAction(bool refreshView = false)
         {
             this.LoadCurrentTime();
             this.LoadTotalTime();
+
+            if (refreshView)
+            {
+                this.SetButtonsEnabled();
+                this.RefreshView();
+            }
         }
+
 
         private void LoadCurrentDate()
         {
@@ -504,8 +511,6 @@ namespace FichadaBinser.ViewModels
 
         private void RefreshView()
         {
-            //this.EntryTimeSpan = new TimeSpan(this.CurrentDay.EntryTime.Value.ToLocalTime().Hour, this.CurrentDay.EntryTime.Value.ToLocalTime().Minute, this.CurrentDay.EntryTime.Value.ToLocalTime().Second);
-
             this.EntryTime = this.CurrentDay.EntryTimeString;
             this.StartLunchTime = this.CurrentDay.StartLunchTimeString;
             this.EndLunchTime = this.CurrentDay.EndLunchTimeString;

@@ -2,6 +2,6 @@
 {
     public interface ITimerViewModel
     {
-        void DoTimerAction();
+        void DoTimerAction(bool refreshView = false);
     }
 }

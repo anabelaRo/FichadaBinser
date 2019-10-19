@@ -199,7 +199,7 @@ namespace FichadaBinser.ViewModels
 
         #region Methods
 
-        public void DoTimerAction()
+        public void DoTimerAction(bool refreshView = false)
         {
             List<Day> weekDays = MainViewModel.GetInstance().WeekDays;
 

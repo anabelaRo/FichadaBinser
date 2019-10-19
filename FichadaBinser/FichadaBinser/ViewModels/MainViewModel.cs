@@ -1,4 +1,5 @@
-﻿using FichadaBinser.Interfaces;
+﻿using FichadaBinser.Helpers;
+using FichadaBinser.Interfaces;
 using FichadaBinser.Models;
 using FichadaBinser.Services;
 using System;
@@ -35,6 +36,7 @@ namespace FichadaBinser.ViewModels
         public List<Day> WeekDays;
 
         private bool IsDirty;
+        private bool IsCurrentDayDirty;
 
         #endregion
 
@@ -80,6 +82,8 @@ namespace FichadaBinser.ViewModels
 
         private void DoTimerAction(IEnumerable<ITimerViewModel> viewModels)
         {
+            bool refreshView = false;
+
             if (this.IsDirty)
             {
                 this.WeekDays = this.dayDataService.GetCurrentWeekDays();
@@ -87,9 +91,18 @@ namespace FichadaBinser.ViewModels
                 this.IsDirty = false;
             }
 
+            if (this.IsCurrentDayDirty)
+            {
+                refreshView = true;
+
+                this.CurrentDay = dayDataService.GetCurrentDay();
+
+                this.IsCurrentDayDirty = false;
+            }
+
             foreach (ITimerViewModel timerViewModel in viewModels)
             {
-                timerViewModel.DoTimerAction();
+                timerViewModel.DoTimerAction(refreshView);
             }
         }
 
@@ -99,6 +112,9 @@ namespace FichadaBinser.ViewModels
                 this.dayDataService.Update(day);
             else
                 this.dayDataService.Insert(day);
+
+            if (day.DayId == DayHelper.GetDayIdByDate(DateTime.Today))
+                this.IsCurrentDayDirty = true;
 
             this.IsDirty = true;
         }

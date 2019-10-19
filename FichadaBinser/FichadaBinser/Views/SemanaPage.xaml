@@ -13,26 +13,24 @@
                 Padding="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <!--<Grid.RowDefinitions>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                    </Grid.RowDefinitions>-->
                     <Label
+                        FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="0"
                         HorizontalTextAlignment="End"
                         Text="Lunes"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeMondayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                     <Label
+                        FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="0"
                         HorizontalOptions="Center"
@@ -44,13 +42,18 @@
                     </Label>
                     
                     <Label
+                        FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="1"
                         HorizontalTextAlignment="End"
                         Text="Martes"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeTuesdayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                     <Label
+                        FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="1"
                         HorizontalOptions="Center"
@@ -62,13 +65,18 @@
                     </Label>
 
                     <Label
+                        FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="2"
                         HorizontalTextAlignment="End"
                         Text="Miércoles"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeWednesdayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                     <Label
+                        FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="2"
                         HorizontalOptions="Center"
@@ -80,13 +88,18 @@
                     </Label>
 
                     <Label
+                        FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="3"
                         HorizontalTextAlignment="End"
                         Text="Jueves"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeThursdayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                     <Label
+                        FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="3"
                         HorizontalOptions="Center"
@@ -98,13 +111,18 @@
                     </Label>
 
                     <Label
+                        FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="4"
                         HorizontalTextAlignment="End"
                         Text="Viernes"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeFridayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                     <Label
+                        FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="4"
                         HorizontalOptions="Center"
@@ -116,13 +134,18 @@
                     </Label>
 
                     <Label
+                        FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="5"
                         HorizontalTextAlignment="End"
                         Text="Sábado"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeSaturdayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                     <Label
+                        FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="5"
                         HorizontalOptions="Center"
@@ -134,13 +157,18 @@
                     </Label>
 
                     <Label
+                        FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="6"
                         HorizontalTextAlignment="End"
                         Text="Domingo"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeSundayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                     <Label
+                        FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="6"
                         HorizontalOptions="Center"

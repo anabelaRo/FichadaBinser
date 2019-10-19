@@ -168,4 +168,7 @@
       <Name>FichadaBinser</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_clear.png" />
+  </ItemGroup>
 </Project>

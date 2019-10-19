@@ -92,6 +92,38 @@ namespace FichadaBinser.ViewModels
             }
         }
 
+        public ICommand DeleteEntryTimeCommand
+        {
+            get
+            {
+                return new RelayCommand(DeleteEntryTime);
+            }
+        }
+
+        public ICommand DeleteStartLunchTimeCommand
+        {
+            get
+            {
+                return new RelayCommand(DeleteStartLunchTime);
+            }
+        }
+
+        public ICommand DeleteEndLunchTimeCommand
+        {
+            get
+            {
+                return new RelayCommand(DeleteEndLunchTime);
+            }
+        }
+
+        public ICommand DeleteExitTimeCommand
+        {
+            get
+            {
+                return new RelayCommand(DeleteExitTime);
+            }
+        }
+
         public async void Cancel()
         {
             await Application.Current.MainPage.Navigation.PopAsync();
@@ -124,6 +156,26 @@ namespace FichadaBinser.ViewModels
 
                 MainViewModel.GetInstance().EditarDia = null;
             }
+        }
+
+        private void DeleteEntryTime()
+        {
+            this.EntryTimeSpan = new TimeSpan();
+        }
+
+        private void DeleteStartLunchTime()
+        {
+            this.StartLunchTimeSpan = new TimeSpan();
+        }
+
+        private void DeleteEndLunchTime()
+        {
+            this.EndLunchTimeSpan = new TimeSpan();
+        }
+
+        private void DeleteExitTime()
+        {
+            this.ExitTimeSpan = new TimeSpan();
         }
 
         #endregion
@@ -185,7 +237,6 @@ namespace FichadaBinser.ViewModels
 
         #region Validations
 
-
         private bool ValidateTimes()
         {
             DateTime? entryTime = this.GetDateTime(this.EntryTimeSpan);
@@ -197,17 +248,20 @@ namespace FichadaBinser.ViewModels
 
             if (entryTime == null)
             {
-                Application.Current.MainPage.DisplayAlert(
-                    Languages.IncorrectTime,
-                    Languages.ValidationCompleteEntryTime,
-                    Languages.Ok);
+                if (startLunchTime != null || endLunchTime != null || exitTime != null)
+                {
+                    Application.Current.MainPage.DisplayAlert(
+                        Languages.IncorrectTime,
+                        Languages.ValidationCompleteEntryTime,
+                        Languages.Ok);
 
-                return false;
+                    return false;
+                }
             }
 
             if (!isCurrentDate)
             {
-                if (exitTime == null)
+                if (entryTime != null && exitTime == null)
                 {
                     Application.Current.MainPage.DisplayAlert(
                         Languages.IncorrectTime,

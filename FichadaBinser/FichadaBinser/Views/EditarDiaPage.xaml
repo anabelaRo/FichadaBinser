@@ -18,67 +18,119 @@
                 </Label>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label
+                        FontSize="Medium"
                         Grid.Column="0"
                         Grid.Row="0"
                         HorizontalTextAlignment="End"
-                        Text="Hora Ingreso"
+                        Text="Ingreso"
                         VerticalOptions="Center">
                     </Label>
                     <TimePicker
                         Grid.Column="1"
                         Grid.Row="0"
+                        HorizontalOptions="FillAndExpand"
                         Time="{Binding EntryTimeSpan, Mode=TwoWay}">
                     </TimePicker>
+                    <Button
+                        BorderRadius="23"
+                        Command="{Binding DeleteEntryTimeCommand}"
+                        Grid.Column="2"
+                        Grid.Row="0"
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        Image="ic_clear.png"
+                        VerticalOptions="Center"
+                        WidthRequest="25">
+                    </Button>
                     
                     <Label
+                        FontSize="Medium"
                         Grid.Column="0"
                         Grid.Row="1"
                         HorizontalTextAlignment="End"
-                        Text="Hora Inicio Almuerzo"
+                        Text="Inicio Almuerzo"
                         VerticalOptions="Center">
                     </Label>
                     <TimePicker
                         Grid.Column="1"
                         Grid.Row="1"
+                        HorizontalOptions="FillAndExpand"
                         Time="{Binding StartLunchTimeSpan, Mode=TwoWay}">
                     </TimePicker>
+                    <Button
+                        BorderRadius="23"
+                        Command="{Binding DeleteStartLunchTimeCommand}"
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        Image="ic_clear.png"
+                        VerticalOptions="Center"
+                        WidthRequest="25">
+                    </Button>
                     
                     <Label
+                        FontSize="Medium"
                         Grid.Column="0"
                         Grid.Row="2"
                         HorizontalTextAlignment="End"
-                        Text="Hora Fin Almuerzo"
+                        Text="Fin Almuerzo"
                         VerticalOptions="Center">
                     </Label>
                     <TimePicker
                         Grid.Column="1"
                         Grid.Row="2"
+                        HorizontalOptions="FillAndExpand"
                         Time="{Binding EndLunchTimeSpan, Mode=TwoWay}">
                     </TimePicker>
+                    <Button
+                        BorderRadius="23"
+                        Command="{Binding DeleteEndLunchTimeCommand}"
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        Image="ic_clear.png"
+                        VerticalOptions="Center"
+                        WidthRequest="25">
+                    </Button>
                     
                     <Label
+                        FontSize="Medium"
                         Grid.Column="0"
                         Grid.Row="3"
                         HorizontalTextAlignment="End"
-                        Text="Hora Egreso"
+                        Text="Egreso"
                         VerticalOptions="Center">
                     </Label>
                     <TimePicker
                         Grid.Column="1"
                         Grid.Row="3"
+                        HorizontalOptions="FillAndExpand"
                         Time="{Binding ExitTimeSpan, Mode=TwoWay}">
                     </TimePicker>
+                    <Button
+                        BorderRadius="23"
+                        Command="{Binding DeleteExitTimeCommand}"
+                        Grid.Column="2"
+                        Grid.Row="3"
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        Image="ic_clear.png"
+                        VerticalOptions="Center"
+                        WidthRequest="25">
+                    </Button>
                 </Grid>
                 <Grid
                     Margin="0,0,0,0"
