@@ -5,6 +5,10 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using FichadaBinser.Interfaces;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
+using Xamarin.Forms;
+using FichadaBinser.Helpers;
 
 namespace FichadaBinser.ViewModels
 {
@@ -80,6 +84,122 @@ namespace FichadaBinser.ViewModels
         public SemanaViewModel()
         {
 
+        }
+
+        #endregion
+
+        #region Commands
+
+        public ICommand TotalTimeMondayCommand
+        {
+            get
+            {
+                return new RelayCommand(TotalTimeMonday);
+            }
+        }
+
+        public ICommand TotalTimeTuesdayCommand
+        {
+            get
+            {
+                return new RelayCommand(TotalTimeTuesday);
+            }
+        }
+
+        public ICommand TotalTimeWednesdayCommand
+        {
+            get
+            {
+                return new RelayCommand(TotalTimeWednesday);
+            }
+        }
+
+        public ICommand TotalTimeThursdayCommand
+        {
+            get
+            {
+                return new RelayCommand(TotalTimeThursday);
+            }
+        }
+
+        public ICommand TotalTimeFridayCommand
+        {
+            get
+            {
+                return new RelayCommand(TotalTimeFriday);
+            }
+        }
+
+        public ICommand TotalTimeSaturdayCommand
+        {
+            get
+            {
+                return new RelayCommand(TotalTimeSaturday);
+            }
+        }
+
+        public ICommand TotalTimeSundayCommand
+        {
+            get
+            {
+                return new RelayCommand(TotalTimeSunday);
+            }
+        }
+
+        private async void TotalTimeMonday()
+        {
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                "Edit",
+                Languages.Cancel,
+                null);
+        }
+
+        private async void TotalTimeTuesday()
+        {
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                "Edit",
+                Languages.Cancel,
+                null);
+        }
+
+        private async void TotalTimeWednesday()
+        {
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                "Edit",
+                Languages.Cancel,
+                null);
+        }
+
+        private async void TotalTimeThursday()
+        {
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                "Edit",
+                Languages.Cancel,
+                null);
+        }
+
+        private async void TotalTimeFriday()
+        {
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                "Edit",
+                Languages.Cancel,
+                null);
+        }
+
+        private async void TotalTimeSaturday()
+        {
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                "Edit",
+                Languages.Cancel,
+                null);
+        }
+
+        private async void TotalTimeSunday()
+        {
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                "Edit",
+                Languages.Cancel,
+                null);
         }
 
         #endregion

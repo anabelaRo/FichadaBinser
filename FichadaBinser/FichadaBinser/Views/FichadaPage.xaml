@@ -8,9 +8,9 @@
     Title="Hoy">
     <ContentPage.Content>
         <ScrollView
-            BindingContext="{Binding Fichada}">
+        BindingContext="{Binding Fichada}">
             <StackLayout
-                Padding="10">
+            Padding="10">
                 <Label
                     FontSize="Large"
                     HorizontalOptions="CenterAndExpand"
@@ -82,12 +82,22 @@
                         Text="Hora Ingreso"
                         VerticalOptions="Center">
                     </Label>
+                    <!--<TimePicker 
+                    VerticalOptions="CenterAndExpand"
+                    Time="{Binding EntryTimeSpan, Mode=TwoWay}"
+                    FontSize="Micro"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Format="HH:mm:ss"/>-->
                     <Label
                         Grid.Column="1"
                         Grid.Row="0"
                         HorizontalTextAlignment="Start"
                         Text="{Binding EntryTime, Mode=TwoWay}"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditEntryCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                     <Button
                         BackgroundColor="IndianRed"
@@ -115,6 +125,9 @@
                         HorizontalTextAlignment="Start"
                         Text="{Binding StartLunchTime, Mode=TwoWay}"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditStartLunchCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                     <Button
                         BackgroundColor="IndianRed"
@@ -142,6 +155,9 @@
                         HorizontalTextAlignment="Start"
                         Text="{Binding EndLunchTime, Mode=TwoWay}"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditEndLunchCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                     <Button
                         BackgroundColor="IndianRed"
@@ -169,6 +185,9 @@
                         HorizontalTextAlignment="Start"
                         Text="{Binding ExitTime, Mode=TwoWay}"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditExitCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                     <Button
                         BackgroundColor="IndianRed"

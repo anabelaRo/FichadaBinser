@@ -38,8 +38,11 @@
                         HorizontalOptions="Center"
                         Text="{Binding TotalTimeMondayString, Mode=TwoWay}"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeMondayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
-
+                    
                     <Label
                         Grid.Column="1"
                         Grid.Row="1"
@@ -53,6 +56,9 @@
                         HorizontalOptions="Center"
                         Text="{Binding TotalTimeTuesdayString, Mode=TwoWay}"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeTuesdayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
 
                     <Label
@@ -68,6 +74,9 @@
                         HorizontalOptions="Center"
                         Text="{Binding TotalTimeWednesdayString, Mode=TwoWay}"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeWednesdayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
 
                     <Label
@@ -83,6 +92,9 @@
                         HorizontalOptions="Center"
                         Text="{Binding TotalTimeThursdayString, Mode=TwoWay}"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeThursdayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
 
                     <Label
@@ -98,6 +110,9 @@
                         HorizontalOptions="Center"
                         Text="{Binding TotalTimeFridayString, Mode=TwoWay}"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeFridayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
 
                     <Label
@@ -113,6 +128,9 @@
                         HorizontalOptions="Center"
                         Text="{Binding TotalTimeSaturdayString, Mode=TwoWay}"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeSaturdayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
 
                     <Label
@@ -128,6 +146,9 @@
                         HorizontalOptions="Center"
                         Text="{Binding TotalTimeSundayString, Mode=TwoWay}"
                         VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TotalTimeSundayCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
                 </Grid>
                 <Grid

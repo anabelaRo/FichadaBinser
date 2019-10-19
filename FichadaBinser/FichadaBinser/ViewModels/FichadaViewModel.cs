@@ -14,6 +14,14 @@ namespace FichadaBinser.ViewModels
 {
     public class FichadaViewModel : BaseViewModel, ITimerViewModel
     {
+        //private TimeSpan entryTimeSpan;
+
+        //public TimeSpan EntryTimeSpan
+        //{
+        //    get { return entryTimeSpan; }
+        //    set { SetValue(ref entryTimeSpan, value); }
+        //}
+
         #region Attributes
 
         private string currentDate;
@@ -316,6 +324,38 @@ namespace FichadaBinser.ViewModels
             }
         }
 
+        public ICommand EditEntryCommand
+        {
+            get
+            {
+                return new RelayCommand(EditEntry);
+            }
+        }
+
+        public ICommand EditStartLunchCommand
+        {
+            get
+            {
+                return new RelayCommand(EditStartLunch);
+            }
+        }
+
+        public ICommand EditEndLunchCommand
+        {
+            get
+            {
+                return new RelayCommand(EditEndLunch);
+            }
+        }
+
+        public ICommand EditExitCommand
+        {
+            get
+            {
+                return new RelayCommand(EditExit);
+            }
+        }
+
         public async void RegisterEntry()
         {
             this.CurrentDay.EntryTime = DateTime.Now.ToLocalTime();
@@ -436,8 +476,44 @@ namespace FichadaBinser.ViewModels
             }
         }
 
+        private async void EditEntry()
+        {
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                "Edit",
+                Languages.Cancel,
+                null);
+
+            
+        }
+
+        private async void EditStartLunch()
+        {
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                "Edit",
+                Languages.Cancel,
+                null);
+        }
+
+        private async void EditEndLunch()
+        {
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                "Edit",
+                Languages.Cancel,
+                null);
+        }
+
+        private async void EditExit()
+        {
+            var response = await Application.Current.MainPage.DisplayActionSheet(
+                "Edit",
+                Languages.Cancel,
+                null);
+        }
+
         private void RefreshView()
         {
+            //this.EntryTimeSpan = new TimeSpan(this.CurrentDay.EntryTime.Value.ToLocalTime().Hour, this.CurrentDay.EntryTime.Value.ToLocalTime().Minute, this.CurrentDay.EntryTime.Value.ToLocalTime().Second);
+
             this.EntryTime = this.CurrentDay.EntryTimeString;
             this.StartLunchTime = this.CurrentDay.StartLunchTimeString;
             this.EndLunchTime = this.CurrentDay.EndLunchTimeString;
