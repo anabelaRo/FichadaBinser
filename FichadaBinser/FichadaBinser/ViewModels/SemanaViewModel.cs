@@ -1,4 +1,4 @@
-﻿using FichadaBinser.Helpers;
+﻿using FichadaBinser.Enums;
 using FichadaBinser.Interfaces;
 using FichadaBinser.Models;
 using FichadaBinser.Views;
@@ -16,6 +16,13 @@ namespace FichadaBinser.ViewModels
     {
         #region Attributes
 
+        private string mondayTextColor;
+        private string tuesdayTextColor;
+        private string wednesdayTextColor;
+        private string thursdayTextColor;
+        private string fridayTextColor;
+        private string saturdayTextColor;
+        private string sundayTextColor;
         private string totalTimeMondayString;
         private string totalTimeTuesdayString;
         private string totalTimeWednesdayString;
@@ -28,6 +35,48 @@ namespace FichadaBinser.ViewModels
         #endregion
 
         #region Properties
+
+        public string MondayTextColor
+        {
+            get { return mondayTextColor; }
+            set { SetValue(ref mondayTextColor, value); }
+        }
+
+        public string TuesdayTextColor
+        {
+            get { return tuesdayTextColor; }
+            set { SetValue(ref tuesdayTextColor, value); }
+        }
+
+        public string WednesdayTextColor
+        {
+            get { return wednesdayTextColor; }
+            set { SetValue(ref wednesdayTextColor, value); }
+        }
+
+        public string ThursdayTextColor
+        {
+            get { return thursdayTextColor; }
+            set { SetValue(ref thursdayTextColor, value); }
+        }
+
+        public string FridayTextColor
+        {
+            get { return fridayTextColor; }
+            set { SetValue(ref fridayTextColor, value); }
+        }
+
+        public string SaturdayTextColor
+        {
+            get { return saturdayTextColor; }
+            set { SetValue(ref saturdayTextColor, value); }
+        }
+
+        public string SundayTextColor
+        {
+            get { return sundayTextColor; }
+            set { SetValue(ref sundayTextColor, value); }
+        }
 
         public string TotalTimeMondayString
         {
@@ -83,7 +132,13 @@ namespace FichadaBinser.ViewModels
 
         public SemanaViewModel()
         {
-
+            this.MondayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            this.TuesdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            this.WednesdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            this.ThursdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            this.FridayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            this.SaturdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            this.sundayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
         }
 
         #endregion
@@ -205,6 +260,7 @@ namespace FichadaBinser.ViewModels
 
             this.LoadWeekDays(weekDays);
             this.LoadTotalTime(weekDays);
+            this.SetTextColor(weekDays);
         }
 
         private void LoadWeekDays(List<Day> weekDays)
@@ -247,6 +303,33 @@ namespace FichadaBinser.ViewModels
             MainViewModel.GetInstance().EditarDia = new EditarDiaViewModel(day);
 
             await Application.Current.MainPage.Navigation.PushAsync(new EditarDiaPage());
+        }
+
+        private void SetTextColor(List<Day> weekDays)
+        {
+            this.MondayTextColor = this.SetTextColor(weekDays, DayOfWeek.Monday);
+            this.TuesdayTextColor = this.SetTextColor(weekDays, DayOfWeek.Tuesday);
+            this.WednesdayTextColor = this.SetTextColor(weekDays, DayOfWeek.Wednesday);
+            this.ThursdayTextColor = this.SetTextColor(weekDays, DayOfWeek.Thursday);
+            this.FridayTextColor = this.SetTextColor(weekDays, DayOfWeek.Friday);
+            this.SaturdayTextColor = this.SetTextColor(weekDays, DayOfWeek.Saturday);
+            this.SundayTextColor = this.SetTextColor(weekDays, DayOfWeek.Sunday);
+        }
+
+        private string SetTextColor(List<Day> weekDays, DayOfWeek dayOfWeek)
+        {
+            Day day = weekDays.Where(x => x.Date.DayOfWeek == dayOfWeek).FirstOrDefault();
+
+            if (day != null)
+            {
+                if (day.EntryTime != null && day.ExitTime == null && day.Date.ToLocalTime() != DateTime.Today.ToLocalTime())
+                    return Convert.ToChar(EnumTextColor.Red).ToString();
+
+                if (day.StartLunchTime != null && day.EndLunchTime == null && day.Date.ToLocalTime() != DateTime.Today.ToLocalTime())
+                    return Convert.ToChar(EnumTextColor.Red).ToString();
+            }
+
+            return Convert.ToChar(EnumTextColor.Gray).ToString();
         }
 
         #endregion
