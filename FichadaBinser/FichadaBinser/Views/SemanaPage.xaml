@@ -25,7 +25,7 @@
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
                     <Label
-                        TextColor="{Binding MondayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding MondayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="0"
@@ -37,7 +37,7 @@
                         </Label.GestureRecognizers>
                     </Label>
                     <Label
-                        TextColor="{Binding MondayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding MondayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="0"
@@ -50,7 +50,7 @@
                     </Label>
                     
                     <Label
-                        TextColor="{Binding TuesdayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding TuesdayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="1"
@@ -62,7 +62,7 @@
                         </Label.GestureRecognizers>
                     </Label>
                     <Label
-                        TextColor="{Binding TuesdayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding TuesdayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="1"
@@ -75,7 +75,7 @@
                     </Label>
 
                     <Label
-                        TextColor="{Binding WednesdayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding WednesdayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="2"
@@ -87,7 +87,7 @@
                         </Label.GestureRecognizers>
                     </Label>
                     <Label
-                        TextColor="{Binding WednesdayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding WednesdayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="2"
@@ -100,7 +100,7 @@
                     </Label>
 
                     <Label
-                        TextColor="{Binding ThursdayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding ThursdayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="3"
@@ -112,7 +112,7 @@
                         </Label.GestureRecognizers>
                     </Label>
                     <Label
-                        TextColor="{Binding ThursdayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding ThursdayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="3"
@@ -125,7 +125,7 @@
                     </Label>
 
                     <Label
-                        TextColor="{Binding FridayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding FridayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="4"
@@ -137,7 +137,7 @@
                         </Label.GestureRecognizers>
                     </Label>
                     <Label
-                        TextColor="{Binding FridayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding FridayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="4"
@@ -150,7 +150,7 @@
                     </Label>
 
                     <Label
-                        TextColor="{Binding SaturdayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding SaturdayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="5"
@@ -162,7 +162,7 @@
                         </Label.GestureRecognizers>
                     </Label>
                     <Label
-                        TextColor="{Binding SaturdayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding SaturdayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="5"
@@ -175,7 +175,7 @@
                     </Label>
 
                     <Label
-                        TextColor="{Binding SundayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding SundayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="1"
                         Grid.Row="6"
@@ -187,7 +187,7 @@
                         </Label.GestureRecognizers>
                     </Label>
                     <Label
-                        TextColor="{Binding SundayTextColor, Converter={StaticResource StringToColorConverter}"
+                        TextColor="{Binding SundayTextColor, Converter={StaticResource StringToColorConverter}}"
                         FontSize="Medium"
                         Grid.Column="2"
                         Grid.Row="6"

@@ -323,38 +323,6 @@ namespace FichadaBinser.ViewModels
             }
         }
 
-        public ICommand EditEntryCommand
-        {
-            get
-            {
-                return new RelayCommand(EditEntry);
-            }
-        }
-
-        public ICommand EditStartLunchCommand
-        {
-            get
-            {
-                return new RelayCommand(EditStartLunch);
-            }
-        }
-
-        public ICommand EditEndLunchCommand
-        {
-            get
-            {
-                return new RelayCommand(EditEndLunch);
-            }
-        }
-
-        public ICommand EditExitCommand
-        {
-            get
-            {
-                return new RelayCommand(EditExit);
-            }
-        }
-
         public async void RegisterEntry()
         {
             this.CurrentDay.EntryTime = DateTime.Now.ToLocalTime();
@@ -473,40 +441,6 @@ namespace FichadaBinser.ViewModels
                 this.SetButtonsEnabled();
                 this.RefreshView();
             }
-        }
-
-        private async void EditEntry()
-        {
-            var response = await Application.Current.MainPage.DisplayActionSheet(
-                "Edit",
-                Languages.Cancel,
-                null);
-
-            
-        }
-
-        private async void EditStartLunch()
-        {
-            var response = await Application.Current.MainPage.DisplayActionSheet(
-                "Edit",
-                Languages.Cancel,
-                null);
-        }
-
-        private async void EditEndLunch()
-        {
-            var response = await Application.Current.MainPage.DisplayActionSheet(
-                "Edit",
-                Languages.Cancel,
-                null);
-        }
-
-        private async void EditExit()
-        {
-            var response = await Application.Current.MainPage.DisplayActionSheet(
-                "Edit",
-                Languages.Cancel,
-                null);
         }
 
         private void RefreshView()

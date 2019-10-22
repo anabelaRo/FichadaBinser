@@ -88,9 +88,6 @@
                         HorizontalTextAlignment="Start"
                         Text="{Binding EntryTime, Mode=TwoWay}"
                         VerticalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EditEntryCommand}"/>
-                        </Label.GestureRecognizers>
                     </Label>
                     <Button
                         BackgroundColor="IndianRed"
@@ -118,9 +115,6 @@
                         HorizontalTextAlignment="Start"
                         Text="{Binding StartLunchTime, Mode=TwoWay}"
                         VerticalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EditStartLunchCommand}"/>
-                        </Label.GestureRecognizers>
                     </Label>
                     <Button
                         BackgroundColor="IndianRed"
@@ -148,9 +142,6 @@
                         HorizontalTextAlignment="Start"
                         Text="{Binding EndLunchTime, Mode=TwoWay}"
                         VerticalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EditEndLunchCommand}"/>
-                        </Label.GestureRecognizers>
                     </Label>
                     <Button
                         BackgroundColor="IndianRed"
@@ -178,9 +169,6 @@
                         HorizontalTextAlignment="Start"
                         Text="{Binding ExitTime, Mode=TwoWay}"
                         VerticalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EditExitCommand}"/>
-                        </Label.GestureRecognizers>
                     </Label>
                     <Button
                         BackgroundColor="IndianRed"
