@@ -22,7 +22,7 @@
                 {
                     current = new Day(today);
 
-                    this.Insert(current);
+                    Insert(current);
                 }
 
                 return current;

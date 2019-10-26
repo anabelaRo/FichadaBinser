@@ -132,13 +132,13 @@ namespace FichadaBinser.ViewModels
 
         public SemanaViewModel()
         {
-            this.MondayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
-            this.TuesdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
-            this.WednesdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
-            this.ThursdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
-            this.FridayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
-            this.SaturdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
-            this.sundayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            MondayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            TuesdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            WednesdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            ThursdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            FridayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            SaturdayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
+            sundayTextColor = Convert.ToChar(EnumTextColor.Gray).ToString();
         }
 
         #endregion
@@ -205,49 +205,49 @@ namespace FichadaBinser.ViewModels
         {
             Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Monday).FirstOrDefault();
 
-            await this.EditDayTimes(day);
+            await EditDayTimes(day);
         }
 
         private async void TotalTimeTuesday()
         {
             Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Tuesday).FirstOrDefault();
 
-            await this.EditDayTimes(day);
+            await EditDayTimes(day);
         }
 
         private async void TotalTimeWednesday()
         {
             Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Wednesday).FirstOrDefault();
 
-            await this.EditDayTimes(day);
+            await EditDayTimes(day);
         }
 
         private async void TotalTimeThursday()
         {
             Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Thursday).FirstOrDefault();
 
-            await this.EditDayTimes(day);
+            await EditDayTimes(day);
         }
 
         private async void TotalTimeFriday()
         {
             Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Friday).FirstOrDefault();
 
-            await this.EditDayTimes(day);
+            await EditDayTimes(day);
         }
 
         private async void TotalTimeSaturday()
         {
             Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Saturday).FirstOrDefault();
 
-            await this.EditDayTimes(day);
+            await EditDayTimes(day);
         }
 
         private async void TotalTimeSunday()
         {
             Day day = MainViewModel.GetInstance().WeekDays.Where(x => x.Date.DayOfWeek == DayOfWeek.Sunday).FirstOrDefault();
 
-            await this.EditDayTimes(day);
+            await EditDayTimes(day);
         }
 
         #endregion
@@ -258,20 +258,20 @@ namespace FichadaBinser.ViewModels
         {
             List<Day> weekDays = MainViewModel.GetInstance().WeekDays;
 
-            this.LoadWeekDays(weekDays);
-            this.LoadTotalTime(weekDays);
-            this.SetTextColor(weekDays);
+            LoadWeekDays(weekDays);
+            LoadTotalTime(weekDays);
+            SetTextColor(weekDays);
         }
 
         private void LoadWeekDays(List<Day> weekDays)
         {
-            this.TotalTimeMondayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Monday);
-            this.TotalTimeTuesdayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Tuesday);
-            this.TotalTimeWednesdayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Wednesday);
-            this.TotalTimeThursdayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Thursday);
-            this.TotalTimeFridayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Friday);
-            this.TotalTimeSaturdayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Saturday);
-            this.TotalTimeSundayString = this.GetDayTotalTimeForLabel(weekDays, DayOfWeek.Sunday);
+            TotalTimeMondayString = GetDayTotalTimeForLabel(weekDays, DayOfWeek.Monday);
+            TotalTimeTuesdayString = GetDayTotalTimeForLabel(weekDays, DayOfWeek.Tuesday);
+            TotalTimeWednesdayString = GetDayTotalTimeForLabel(weekDays, DayOfWeek.Wednesday);
+            TotalTimeThursdayString = GetDayTotalTimeForLabel(weekDays, DayOfWeek.Thursday);
+            TotalTimeFridayString = GetDayTotalTimeForLabel(weekDays, DayOfWeek.Friday);
+            TotalTimeSaturdayString = GetDayTotalTimeForLabel(weekDays, DayOfWeek.Saturday);
+            TotalTimeSundayString = GetDayTotalTimeForLabel(weekDays, DayOfWeek.Sunday);
         }
 
         private void LoadTotalTime(List<Day> weekDays)
@@ -280,7 +280,7 @@ namespace FichadaBinser.ViewModels
 
             TimeSpan time = TimeSpan.FromSeconds(totalSeconds);
 
-            this.TotalTime = string.Format(
+            TotalTime = string.Format(
                     "{0:00}:{1:00}:{2:00}",
                     (int)time.TotalHours,
                     time.Minutes,
@@ -307,13 +307,13 @@ namespace FichadaBinser.ViewModels
 
         private void SetTextColor(List<Day> weekDays)
         {
-            this.MondayTextColor = this.SetTextColor(weekDays, DayOfWeek.Monday);
-            this.TuesdayTextColor = this.SetTextColor(weekDays, DayOfWeek.Tuesday);
-            this.WednesdayTextColor = this.SetTextColor(weekDays, DayOfWeek.Wednesday);
-            this.ThursdayTextColor = this.SetTextColor(weekDays, DayOfWeek.Thursday);
-            this.FridayTextColor = this.SetTextColor(weekDays, DayOfWeek.Friday);
-            this.SaturdayTextColor = this.SetTextColor(weekDays, DayOfWeek.Saturday);
-            this.SundayTextColor = this.SetTextColor(weekDays, DayOfWeek.Sunday);
+            MondayTextColor = SetTextColor(weekDays, DayOfWeek.Monday);
+            TuesdayTextColor = SetTextColor(weekDays, DayOfWeek.Tuesday);
+            WednesdayTextColor = SetTextColor(weekDays, DayOfWeek.Wednesday);
+            ThursdayTextColor = SetTextColor(weekDays, DayOfWeek.Thursday);
+            FridayTextColor = SetTextColor(weekDays, DayOfWeek.Friday);
+            SaturdayTextColor = SetTextColor(weekDays, DayOfWeek.Saturday);
+            SundayTextColor = SetTextColor(weekDays, DayOfWeek.Sunday);
         }
 
         private string SetTextColor(List<Day> weekDays, DayOfWeek dayOfWeek)

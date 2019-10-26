@@ -8,7 +8,7 @@ namespace FichadaBinser.Infrastructure
 
         public InstanceLocator()
         {
-            this.Main = new MainViewModel();
+            Main = new MainViewModel();
         }
     }
 }

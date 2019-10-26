@@ -17,7 +17,7 @@
         public DataAccess()
         {
             var config = DependencyService.Get<IConfig>();
-            this.connection = new SQLiteConnection(
+            connection = new SQLiteConnection(
                 config.Platform,
                 Path.Combine(config.DirectoryDB, "Fichada.db3"));
 
@@ -26,17 +26,17 @@
 
         public void Insert<T>(T model)
         {
-            this.connection.Insert(model);
+            connection.Insert(model);
         }
 
         public void Update<T>(T model)
         {
-            this.connection.Update(model);
+            connection.Update(model);
         }
 
         public void Delete<T>(T model)
         {
-            this.connection.Delete(model);
+            connection.Delete(model);
         }
 
         public T First<T>(bool WithChildren) where T : class

@@ -13,7 +13,7 @@ namespace FichadaBinser.Models
 
         public Day(DateTime date)
         {
-            this.Date = date;
+            Date = date;
         }
 
         [PrimaryKey]
@@ -31,33 +31,33 @@ namespace FichadaBinser.Models
             {
                 int totalSeconds = 0;
 
-                if (this.EntryTime != null)
+                if (EntryTime != null)
                 {
-                    if (this.StartLunchTime != null)
+                    if (StartLunchTime != null)
                     {
-                        totalSeconds += Convert.ToInt32(this.StartLunchTime.Value.ToLocalTime().Subtract(this.EntryTime.Value.ToLocalTime()).TotalSeconds);
+                        totalSeconds += Convert.ToInt32(StartLunchTime.Value.ToLocalTime().Subtract(EntryTime.Value.ToLocalTime()).TotalSeconds);
 
-                        if (this.EndLunchTime != null)
+                        if (EndLunchTime != null)
                         {
-                            if (this.ExitTime != null)
+                            if (ExitTime != null)
                             {
-                                totalSeconds += Convert.ToInt32(this.ExitTime.Value.ToLocalTime().Subtract(this.EndLunchTime.Value.ToLocalTime()).TotalSeconds);
+                                totalSeconds += Convert.ToInt32(ExitTime.Value.ToLocalTime().Subtract(EndLunchTime.Value.ToLocalTime()).TotalSeconds);
                             }
                             else
                             {
-                                totalSeconds += Convert.ToInt32(DateTime.Now.ToLocalTime().Subtract(this.EndLunchTime.Value.ToLocalTime()).TotalSeconds);
+                                totalSeconds += Convert.ToInt32(DateTime.Now.ToLocalTime().Subtract(EndLunchTime.Value.ToLocalTime()).TotalSeconds);
                             }
                         }
                     }
                     else
                     {
-                        if (this.ExitTime != null)
+                        if (ExitTime != null)
                         {
-                            totalSeconds += Convert.ToInt32(this.ExitTime.Value.ToLocalTime().Subtract(this.EntryTime.Value.ToLocalTime()).TotalSeconds);
+                            totalSeconds += Convert.ToInt32(ExitTime.Value.ToLocalTime().Subtract(EntryTime.Value.ToLocalTime()).TotalSeconds);
                         }
                         else
                         {
-                            totalSeconds += Convert.ToInt32(DateTime.Now.ToLocalTime().Subtract(this.EntryTime.Value.ToLocalTime()).TotalSeconds);
+                            totalSeconds += Convert.ToInt32(DateTime.Now.ToLocalTime().Subtract(EntryTime.Value.ToLocalTime()).TotalSeconds);
                         }
                     }
                 }
@@ -71,7 +71,7 @@ namespace FichadaBinser.Models
         {
             get
             {
-                TimeSpan time = TimeSpan.FromSeconds(this.TotalTime);
+                TimeSpan time = TimeSpan.FromSeconds(TotalTime);
 
                 return time.ToString(@"hh\:mm\:ss");
             }
@@ -82,8 +82,8 @@ namespace FichadaBinser.Models
         {
             get
             {
-                if (this.EntryTime != null)
-                    return this.EntryTime.Value.ToLocalTime().ToString("HH:mm:ss");
+                if (EntryTime != null)
+                    return EntryTime.Value.ToLocalTime().ToString("HH:mm:ss");
 
                 return null;
             }
@@ -94,8 +94,8 @@ namespace FichadaBinser.Models
         {
             get
             {
-                if (this.StartLunchTime != null)
-                    return this.StartLunchTime.Value.ToLocalTime().ToString("HH:mm:ss");
+                if (StartLunchTime != null)
+                    return StartLunchTime.Value.ToLocalTime().ToString("HH:mm:ss");
 
                 return null;
             }
@@ -106,8 +106,8 @@ namespace FichadaBinser.Models
         {
             get
             {
-                if (this.EndLunchTime != null)
-                    return this.EndLunchTime.Value.ToLocalTime().ToString("HH:mm:ss");
+                if (EndLunchTime != null)
+                    return EndLunchTime.Value.ToLocalTime().ToString("HH:mm:ss");
 
                 return null;
             }
@@ -118,8 +118,8 @@ namespace FichadaBinser.Models
         {
             get
             {
-                if (this.ExitTime != null)
-                    return this.ExitTime.Value.ToLocalTime().ToString("HH:mm:ss");
+                if (ExitTime != null)
+                    return ExitTime.Value.ToLocalTime().ToString("HH:mm:ss");
 
                 return null;
             }
@@ -127,8 +127,8 @@ namespace FichadaBinser.Models
 
         public override int GetHashCode()
         {
-            return this.DayId != null 
-                ? (int)this.DayId 
+            return DayId != null 
+                ? (int)DayId 
                 : 0;
         }
     }

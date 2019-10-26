@@ -54,15 +54,15 @@ namespace FichadaBinser.ViewModels
         {
             instance = this;
 
-            this.dayDataService = new DayDataService();
+            dayDataService = new DayDataService();
 
-            this.CurrentDay = dayDataService.GetCurrentDay();
-            this.WeekDays = this.dayDataService.GetCurrentWeekDays();
+            CurrentDay = dayDataService.GetCurrentDay();
+            WeekDays = dayDataService.GetCurrentWeekDays();
 
-            this.Fichada = new FichadaViewModel();
-            this.Semana = new SemanaViewModel();
+            Fichada = new FichadaViewModel();
+            Semana = new SemanaViewModel();
 
-            this.InitializeTimer();
+            InitializeTimer();
         }
 
         #endregion
@@ -71,11 +71,11 @@ namespace FichadaBinser.ViewModels
 
         private void InitializeTimer()
         {
-            var viewModels = new ITimerViewModel[] { this.Fichada, this.Semana };
+            var viewModels = new ITimerViewModel[] { Fichada, Semana };
 
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                Device.BeginInvokeOnMainThread(() => this.DoTimerAction(viewModels));
+                Device.BeginInvokeOnMainThread(() => DoTimerAction(viewModels));
                 return true;
             });
         }
@@ -84,20 +84,20 @@ namespace FichadaBinser.ViewModels
         {
             bool refreshView = false;
 
-            if (this.IsDirty)
+            if (IsDirty)
             {
-                this.WeekDays = this.dayDataService.GetCurrentWeekDays();
+                WeekDays = dayDataService.GetCurrentWeekDays();
 
-                this.IsDirty = false;
+                IsDirty = false;
             }
 
-            if (this.IsCurrentDayDirty)
+            if (IsCurrentDayDirty)
             {
                 refreshView = true;
 
-                this.CurrentDay = dayDataService.GetCurrentDay();
+                CurrentDay = dayDataService.GetCurrentDay();
 
-                this.IsCurrentDayDirty = false;
+                IsCurrentDayDirty = false;
             }
 
             foreach (ITimerViewModel timerViewModel in viewModels)
@@ -109,14 +109,14 @@ namespace FichadaBinser.ViewModels
         public void SaveToDataBase(Day day)
         {
             if (day.DayId != null)
-                this.dayDataService.Update(day);
+                dayDataService.Update(day);
             else
-                this.dayDataService.Insert(day);
+                dayDataService.Insert(day);
 
             if (day.DayId == DayHelper.GetDayIdByDate(DateTime.Today))
-                this.IsCurrentDayDirty = true;
+                IsCurrentDayDirty = true;
 
-            this.IsDirty = true;
+            IsDirty = true;
         }
 
         #endregion

@@ -61,10 +61,10 @@ namespace FichadaBinser.ViewModels
 
         public EditarDiaViewModel(Day day)
         {
-            this.DayShowing = day;
+            DayShowing = day;
 
-            this.LoadDateShowing();
-            this.LoadDayTimes();
+            LoadDateShowing();
+            LoadDayTimes();
         }
 
         #endregion
@@ -128,7 +128,7 @@ namespace FichadaBinser.ViewModels
 
         public async void Save()
         {
-            if (!this.ValidateTimes())
+            if (!ValidateTimes())
                 return;
 
             var source = await Application.Current.MainPage.DisplayActionSheet(
@@ -140,12 +140,12 @@ namespace FichadaBinser.ViewModels
 
             if (source == Languages.Yes)
             {
-                this.DayShowing.EntryTime = this.GetDateTime(this.EntryTimeSpan);
-                this.DayShowing.StartLunchTime = this.GetDateTime(this.StartLunchTimeSpan);
-                this.DayShowing.EndLunchTime = this.GetDateTime(this.EndLunchTimeSpan);
-                this.DayShowing.ExitTime = this.GetDateTime(this.ExitTimeSpan);
+                DayShowing.EntryTime = GetDateTime(EntryTimeSpan);
+                DayShowing.StartLunchTime = GetDateTime(StartLunchTimeSpan);
+                DayShowing.EndLunchTime = GetDateTime(EndLunchTimeSpan);
+                DayShowing.ExitTime = GetDateTime(ExitTimeSpan);
 
-                MainViewModel.GetInstance().SaveToDataBase(this.DayShowing);
+                MainViewModel.GetInstance().SaveToDataBase(DayShowing);
 
                 await Application.Current.MainPage.Navigation.PopAsync();
 
@@ -155,22 +155,22 @@ namespace FichadaBinser.ViewModels
 
         private void DeleteEntryTime()
         {
-            this.EntryTimeSpan = new TimeSpan();
+            EntryTimeSpan = new TimeSpan();
         }
 
         private void DeleteStartLunchTime()
         {
-            this.StartLunchTimeSpan = new TimeSpan();
+            StartLunchTimeSpan = new TimeSpan();
         }
 
         private void DeleteEndLunchTime()
         {
-            this.EndLunchTimeSpan = new TimeSpan();
+            EndLunchTimeSpan = new TimeSpan();
         }
 
         private void DeleteExitTime()
         {
-            this.ExitTimeSpan = new TimeSpan();
+            ExitTimeSpan = new TimeSpan();
         }
 
         #endregion
@@ -183,19 +183,19 @@ namespace FichadaBinser.ViewModels
 
             string strFecha = string.Format(
                     "{0} {1} de {2}",
-                    StringHelper.FirstUpper(myCulture.DateTimeFormat.GetDayName(this.DayShowing.Date.DayOfWeek)),
-                    this.DayShowing.Date.Day.ToString(),
-                    StringHelper.FirstUpper(myCulture.DateTimeFormat.GetMonthName(this.DayShowing.Date.Month)));
+                    StringHelper.FirstUpper(myCulture.DateTimeFormat.GetDayName(DayShowing.Date.DayOfWeek)),
+                    DayShowing.Date.Day.ToString(),
+                    StringHelper.FirstUpper(myCulture.DateTimeFormat.GetMonthName(DayShowing.Date.Month)));
 
-            this.DateShowing = strFecha;
+            DateShowing = strFecha;
         }
 
         private void LoadDayTimes()
         {
-            this.EntryTimeSpan = this.GetTimeSpan(this.DayShowing.EntryTime);
-            this.StartLunchTimeSpan = this.GetTimeSpan(this.DayShowing.StartLunchTime);
-            this.EndLunchTimeSpan = this.GetTimeSpan(this.DayShowing.EndLunchTime);
-            this.ExitTimeSpan = this.GetTimeSpan(this.DayShowing.ExitTime);
+            EntryTimeSpan = GetTimeSpan(DayShowing.EntryTime);
+            StartLunchTimeSpan = GetTimeSpan(DayShowing.StartLunchTime);
+            EndLunchTimeSpan = GetTimeSpan(DayShowing.EndLunchTime);
+            ExitTimeSpan = GetTimeSpan(DayShowing.ExitTime);
         }
 
         private TimeSpan GetTimeSpan(DateTime? time)
@@ -220,9 +220,9 @@ namespace FichadaBinser.ViewModels
             }
 
             return new DateTime(
-                this.DayShowing.Date.Year,
-                this.DayShowing.Date.Month,
-                this.DayShowing.Date.Day,
+                DayShowing.Date.Year,
+                DayShowing.Date.Month,
+                DayShowing.Date.Day,
                 timeSpan.Hours,
                 timeSpan.Minutes,
                 timeSpan.Seconds);
@@ -234,12 +234,12 @@ namespace FichadaBinser.ViewModels
 
         private bool ValidateTimes()
         {
-            DateTime? entryTime = this.GetDateTime(this.EntryTimeSpan);
-            DateTime? startLunchTime = this.GetDateTime(this.StartLunchTimeSpan);
-            DateTime? endLunchTime = this.GetDateTime(this.EndLunchTimeSpan);
-            DateTime? exitTime = this.GetDateTime(this.ExitTimeSpan);
+            DateTime? entryTime = GetDateTime(EntryTimeSpan);
+            DateTime? startLunchTime = GetDateTime(StartLunchTimeSpan);
+            DateTime? endLunchTime = GetDateTime(EndLunchTimeSpan);
+            DateTime? exitTime = GetDateTime(ExitTimeSpan);
 
-            bool isCurrentDate = (this.DayShowing.Date.ToLocalTime() == DateTime.Today.Date.ToLocalTime());
+            bool isCurrentDate = (DayShowing.Date.ToLocalTime() == DateTime.Today.Date.ToLocalTime());
 
             if (entryTime == null)
             {
